@@ -40,7 +40,7 @@
                             </asp:DropDownList>
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TrabajoFinalLabo4ConnectionString %>" SelectCommand="SELECT * FROM [Rubro]">
                             <SelectParameters>
-                                <asp:Parameter DefaultValue="false" Name="Habilitado"  Type="Boolean" />
+                                <asp:Parameter DefaultValue="true" Name="Habilitado"  Type="Boolean" />
                             </SelectParameters>
                         </asp:SqlDataSource>                    
                         </div>

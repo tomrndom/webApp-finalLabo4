@@ -100,31 +100,31 @@
                 <ul class="list">
                     <li class="header">MENU PRINCIPAL</li>
                     <li>
-                        <a href="<%= Page.ResolveUrl("~/Inicio.aspx") %>">
+                        <a asp-page="/Index">Home</a>                        
                             <i class="material-icons">home</i>
                             <span>Inicio</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<%= Page.ResolveUrl("~/Clientes.aspx") %>">
+                        <a asp-page="/Index">Home</a>
                             <i class="material-icons">group</i>
                             <span>Clientes</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<%= Page.ResolveUrl("~/Pedidos.aspx") %>">
+                        <a asp-page="/Index">Home</a>
                             <i class="material-icons">local_shipping</i>
                             <span>Pedidos</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<%= Page.ResolveUrl("~/Articulos.aspx") %>">
+                        <a asp-page="/Index">Home</a>
                             <i class="material-icons">layers</i>
                             <span>Artículos</span>
                         </a>
                     </li>
                     <li>
-                        <a href="<%= Page.ResolveUrl("~/Rubros.aspx") %>">
+                        <a asp-page="/Index">Home</a>
                             <i class="material-icons">library_books</i>
                             <span>Rubros</span>
                         </a>
@@ -149,11 +149,7 @@
     <section class="content">
                         
                     <!-- CONTENIDO -->
-                    <div>
-                        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
-        
-                        </asp:ContentPlaceHolder>
-                    </div>
+                    @RenderBody()
                     <!-- FIN CONTENIDO-->
         
     </section>
@@ -192,5 +188,7 @@
             });
         });
     </script>
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

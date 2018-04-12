@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 public partial class index : System.Web.UI.Page
 {
-    PedidosDataContext pedidos = new PedidosDataContext();
+    PedidosDataContext db = new PedidosDataContext();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,7 +19,7 @@ public partial class index : System.Web.UI.Page
     protected void cstvUsuario_ServerValidate(object source, ServerValidateEventArgs args)
     {
         //Se valida que el usuario ingresado exista en la base de datos y este habilitado
-        bool existeUsuario = (from user in pedidos.Usuarios
+        bool existeUsuario = (from user in db.Usuarios
                               where user.nombreUsuario == txtUsuario.Text == true
                               select user).Any();
         if (existeUsuario)
@@ -38,7 +38,7 @@ public partial class index : System.Web.UI.Page
         if (cstvUsuario.IsValid)
         {
             //Se valida que la contraseña sea correcta
-            var usuario = (from user in pedidos.Usuarios
+            var usuario = (from user in db.Usuarios
                            where user.nombreUsuario== txtUsuario.Text
                            select user).Single();
             if (usuario.password == txtPassword.Text)
@@ -57,7 +57,7 @@ public partial class index : System.Web.UI.Page
         {
             if (Page.IsValid)
             {
-                var usuario = (from user in pedidos.Usuarios
+                var usuario = (from user in db.Usuarios
                                where user.nombreUsuario == txtUsuario.Text
                                select user).Single();
 

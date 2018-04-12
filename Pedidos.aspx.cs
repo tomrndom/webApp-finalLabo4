@@ -9,7 +9,29 @@ public partial class Pedidos : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            cargarPedidos();
+        }
 
+    }
+
+    protected void cargarPedidos()
+    {
+        try
+        {
+            using (var context = new PedidosDataContext())
+            {
+                var listaPedidos = (from lPedidos in context.PedidoVentas select lPedidos).ToList();
+                gridPedidos.DataSource = listaPedidos.AsEnumerable();
+                gridPedidos.DataBind();
+            }
+        }
+        catch (Exception ex)
+        {
+
+            throw;
+        }
     }
 
     protected void btnNuevoPedido_Click(object sender, EventArgs e)

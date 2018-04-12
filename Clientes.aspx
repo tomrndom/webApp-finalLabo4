@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TrabajoFinalLabo4ConnectionString %>" SelectCommand="SELECT Cliente.id_cliente, Cliente.razonSocial, Cliente.cuit, Cliente.saldo, Cliente.id_domicilio, Cliente.id_domicilioNegocio, Domicilio.id_domicilio AS Expr1, Domicilio.calle, Domicilio.numero, Domicilio.localidad, Domicilio.latitud, Domicilio.longitud FROM Cliente INNER JOIN Domicilio ON Cliente.id_domicilio = Domicilio.id_domicilio AND Cliente.id_domicilioNegocio = Domicilio.id_domicilio"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Laboratorio4ConnectionString %>" SelectCommand="SELECT Cliente.id_cliente, Cliente.razonSocial, Cliente.cuit, Cliente.saldo, Cliente.id_domicilio, Cliente.id_domicilioNegocio, Domicilio.id_domicilio AS Expr1, Domicilio.calle, Domicilio.numero, Domicilio.localidad, Domicilio.latitud, Domicilio.longitud FROM Cliente INNER JOIN Domicilio ON Cliente.id_domicilio = Domicilio.id_domicilio AND Cliente.id_domicilioNegocio = Domicilio.id_domicilio"></asp:SqlDataSource>
     </div>
 </asp:Content>
 

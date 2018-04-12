@@ -9,30 +9,92 @@ public partial class RubroFormulario : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        ListItem item = new ListItem("", "-1");
+
+        if (!Page.IsPostBack) {
+            cargarRubros(Request.QueryString["id"]);
+            if (Request.QueryString["id"] == null)
+            {
+                titulo.InnerHtml = "Nuevo Rubro";
+            }
+            else
+            {
+                titulo.InnerHtml = "Editar Rubro";
+
+                PrecargarDatos(Int32.Parse(Request.QueryString["id"]));
+            }
+
+        } 
+
+        /*ListItem item = new ListItem("", "-1");
         ddlRubroPri.Items.Insert(0, item);
 
-        PedidosDataContext db = new PedidosDataContext();        
+        PedidosDataContext db = new PedidosDataContext();      */  
 
-        if (Request.QueryString["id"] == null)
-        {
-            titulo.InnerHtml = "Nuevo Rubro";
-        }
-        else
-        {
-            titulo.InnerHtml = "Editar Rubro";
+        
+    }
 
-            
-            var temp = (from ru in db.Rubros
+
+    private void PrecargarDatos(int id)
+    {
+        try
+        {
+            using (var context = new PedidosDataContext())
+            {
+                var temp = (from ru in context.Rubros
                         where ru.id_rubro == Convert.ToInt32(Request.QueryString["id"])
                         select ru).Single();
-
-            if (!IsPostBack)
-            {
-                txtCodigo.Text = temp.codigo;
-                txtDenominacion.Text = temp.denominacion;
-                ddlRubroPri.SelectedIndex = Convert.ToInt32(temp.id_rubroPrimario);                                
+            txtCodigo.Text = temp.codigo;
+            txtDenominacion.Text = temp.denominacion;
+            
+            if (temp.id_rubroPrimario == null)
+                {
+                    ddlRubroPri.SelectedValue = "-1";
+                }
+                else
+                {
+                    ddlRubroPri.SelectedValue = Convert.ToString(temp.id_rubroPrimario);
+                }
+           
             }
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
+    private void cargarRubros(string idModificar)
+    {
+        try
+        {
+            using (var context = new PedidosDataContext())
+            {
+                List<Rubro> ListaRubro = new List<Rubro>();
+                if (idModificar == null)
+                {
+                    ListaRubro = (from iR in context.Rubros select iR).ToList();
+                }
+                else
+                {
+                    ListaRubro = (from iR in context.Rubros where iR.id_rubro.ToString() != idModificar select iR).ToList();
+                }
+              
+                Rubro ir = new Rubro();
+                ir.id_rubro = -1;
+                ir.denominacion = "SIN RUBRO";
+                ListaRubro.Add(ir);
+                ddlRubroPri.DataSource = ListaRubro;
+                ddlRubroPri.DataValueField = "id_rubro";
+                ddlRubroPri.DataTextField = "denominacion";
+                ddlRubroPri.DataBind();
+
+
+            }
+        }
+        catch (Exception)
+        {
+
+            throw;
         }
     }
 
@@ -46,7 +108,7 @@ public partial class RubroFormulario : System.Web.UI.Page
             ru.codigo = txtCodigo.Text;
             ru.denominacion = txtDenominacion.Text;
             db.Rubros.InsertOnSubmit(ru);
-            if (ddlRubroPri.SelectedIndex == -1)
+            if (ddlRubroPri.SelectedValue == "-1")
             {
                 ru.id_rubroPrimario = null;
             }
@@ -64,12 +126,12 @@ public partial class RubroFormulario : System.Web.UI.Page
 
             temp.codigo = txtCodigo.Text;
             temp.denominacion = txtDenominacion.Text;
-            if (ddlRubroPri.SelectedIndex == -1)
+            if (ddlRubroPri.SelectedValue == "-1")
             {
                 temp.id_rubroPrimario = null;
             }
             else {                
-                temp.id_rubroPrimario = ddlRubroPri.SelectedIndex;
+                temp.id_rubroPrimario = Int32.Parse(ddlRubroPri.SelectedValue);
             }
             
             

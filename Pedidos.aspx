@@ -17,15 +17,16 @@
                 </div>
                 <div class="body">
                     <asp:GridView ID="gridPedidos" runat="server" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" 
-                        DataKeyNames="id_cliente" BorderStyle="None" BorderColor="#CCCCCC" GridLines="Horizontal" CssClass="table table-striped" Style="margin: 0 auto" DataSourceID="SqlDataSource1">
+                        DataKeyNames="id_cliente" BorderStyle="None" BorderColor="#CCCCCC" GridLines="Horizontal" CssClass="table table-striped" Style="margin: 0 auto" >
                         <Columns>
-                            <asp:DynamicField DataField="fechaEstimadaEntrega" HeaderText="fechaEstimadaEntrega" />
-                            <asp:DynamicField DataField="estado" HeaderText="estado" />
-                            <asp:DynamicField DataField="entregado" HeaderText="entregado" />
-                            <asp:DynamicField DataField="fechaPedido" HeaderText="fechaPedido" />
-                            <asp:DynamicField DataField="subTotal" HeaderText="subTotal" />
-                            <asp:DynamicField DataField="montoTotal" HeaderText="montoTotal" />
-                            <asp:DynamicField DataField="id_cliente" HeaderText="id_cliente" />
+                            <asp:BoundField DataField="fechaEstimadaEntrega" HeaderText="fechaEstimadaEntrega" />
+                            
+                            <asp:BoundField DataField="estado" HeaderText="estado" />
+                            <asp:BoundField DataField="entregado" HeaderText="entregado" />
+                            <asp:BoundField DataField="fechaPedido" HeaderText="fechaPedido" />
+                            <asp:BoundField DataField="subTotal" HeaderText="subTotal" />
+                            <asp:BoundField DataField="montoTotal" HeaderText="montoTotal" />
+                            <asp:BoundField DataField="id_cliente" HeaderText="id_cliente" />
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="btnBorrar" Text="<i class='material-icons'>delete</i>" runat="server" OnClientClick="return confirm('¿Esta seguro que quiere borrar a este cliente?')" OnCommand="btnBorrar_Command"  CommandArgument='<%# Eval("id_cliente") %>' ImageAlign="Left"></asp:LinkButton>                                    
@@ -40,12 +41,12 @@
                                 <ItemTemplate>
                                     <asp:Button ID="btnVerPedidos" runat="server" CssClass="btn bg-blue actions waves-effect align-center" Text="Ver Pedidos" OnCommand="btnVerPedidos_Command" CommandArgument='<%# Eval("id_cliente") %>' />
                                 </ItemTemplate>
-                            </asp:TemplateField>                            
+                            </asp:TemplateField>                           
                         </Columns>
                     </asp:GridView>   
                 </div>
             </div>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TrabajoFinalLabo4ConnectionString %>" SelectCommand="SELECT * FROM [PedidoVenta]"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Laboratorio4ConnectionString %>" SelectCommand="SELECT * FROM [PedidoVenta]"></asp:SqlDataSource>
     </div>
 </asp:Content>

@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TrabajoFinalLabo4ConnectionString %>" SelectCommand="SELECT Articulo.*, Rubro.denominacion AS Expr1 FROM Articulo INNER JOIN Rubro ON Articulo.id_rubro = Rubro.id_rubro"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Laboratorio4ConnectionString %>" SelectCommand="SELECT Articulo.*, Rubro.denominacion AS Expr1 FROM Articulo INNER JOIN Rubro ON Articulo.id_rubro = Rubro.id_rubro"></asp:SqlDataSource>
     </div>
 </asp:Content>
 

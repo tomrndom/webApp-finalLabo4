@@ -64,7 +64,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <asp:DropDownList ID="ddlRubro" runat="server" DataSourceID="SqlDataSource1" DataTextField="denominacion" DataValueField="id_rubro" CssClass="input" Width="240px" AppendDataBoundItems="true">                                
                             </asp:DropDownList>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TrabajoFinalLabo4ConnectionString %>" SelectCommand="SELECT * FROM [Rubro]">
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Laboratorio4ConnectionString %>" SelectCommand="SELECT * FROM [Rubro]">
                             <SelectParameters>
                                 <asp:Parameter DefaultValue="true" Name="Habilitado"  Type="Boolean" />
                             </SelectParameters>

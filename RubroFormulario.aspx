@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="RubroFormulario.aspx.cs" Inherits="RubroFormulario" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="RubroFormulario.aspx.cs" Inherits="RubroFormulario" Explicit="true"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -36,13 +36,9 @@
                             <asp:Label>Rubro Primario</asp:Label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">                            
-                            <asp:DropDownList ID="ddlRubroPri" runat="server" DataSourceID="SqlDataSource1" DataTextField="denominacion" DataValueField="id_rubro" CssClass="input" AppendDataBoundItems="true">  
+                            <asp:DropDownList ID="ddlRubroPri" runat="server"  >  
                             </asp:DropDownList>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:TrabajoFinalLabo4ConnectionString %>" SelectCommand="SELECT * FROM [Rubro]">
-                            <SelectParameters>
-                                <asp:Parameter DefaultValue="false" Name="Habilitado"  Type="Boolean" />
-                            </SelectParameters>
-                        </asp:SqlDataSource>                    
+                    <%--  --%>
                         </div>
                     </div>
 

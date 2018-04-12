@@ -21,7 +21,7 @@ using System.Reflection;
 
 
 
-[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="TrabajoFinalLabo4")]
+[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Laboratorio4")]
 public partial class PedidosDataContext : System.Data.Linq.DataContext
 {
 	
@@ -32,9 +32,6 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
   partial void InsertArticulo(Articulo instance);
   partial void UpdateArticulo(Articulo instance);
   partial void DeleteArticulo(Articulo instance);
-  partial void InsertUsuario(Usuario instance);
-  partial void UpdateUsuario(Usuario instance);
-  partial void DeleteUsuario(Usuario instance);
   partial void InsertCliente(Cliente instance);
   partial void UpdateCliente(Cliente instance);
   partial void DeleteCliente(Cliente instance);
@@ -50,10 +47,13 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
   partial void InsertRubro(Rubro instance);
   partial void UpdateRubro(Rubro instance);
   partial void DeleteRubro(Rubro instance);
+  partial void InsertUsuario(Usuario instance);
+  partial void UpdateUsuario(Usuario instance);
+  partial void DeleteUsuario(Usuario instance);
   #endregion
 	
 	public PedidosDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["TrabajoFinalLabo4ConnectionString"].ConnectionString, mappingSource)
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["Laboratorio4ConnectionString"].ConnectionString, mappingSource)
 	{
 		OnCreated();
 	}
@@ -87,14 +87,6 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<Articulo>();
-		}
-	}
-	
-	public System.Data.Linq.Table<Usuario> Usuarios
-	{
-		get
-		{
-			return this.GetTable<Usuario>();
 		}
 	}
 	
@@ -135,6 +127,14 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<Rubro>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Usuario> Usuarios
+	{
+		get
+		{
+			return this.GetTable<Usuario>();
 		}
 	}
 }
@@ -411,188 +411,6 @@ public partial class Articulo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.Articulo = null;
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Usuarios")]
-public partial class Usuario : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _id_usuario;
-	
-	private string _nombreUsuario;
-	
-	private string _password;
-	
-	private string _nombreEmpleado;
-	
-	private string _apellidoEmpleado;
-	
-	private string _email;
-	
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onid_usuarioChanging(int value);
-    partial void Onid_usuarioChanged();
-    partial void OnnombreUsuarioChanging(string value);
-    partial void OnnombreUsuarioChanged();
-    partial void OnpasswordChanging(string value);
-    partial void OnpasswordChanged();
-    partial void OnnombreEmpleadoChanging(string value);
-    partial void OnnombreEmpleadoChanged();
-    partial void OnapellidoEmpleadoChanging(string value);
-    partial void OnapellidoEmpleadoChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    #endregion
-	
-	public Usuario()
-	{
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_usuario", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int id_usuario
-	{
-		get
-		{
-			return this._id_usuario;
-		}
-		set
-		{
-			if ((this._id_usuario != value))
-			{
-				this.Onid_usuarioChanging(value);
-				this.SendPropertyChanging();
-				this._id_usuario = value;
-				this.SendPropertyChanged("id_usuario");
-				this.Onid_usuarioChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreUsuario", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string nombreUsuario
-	{
-		get
-		{
-			return this._nombreUsuario;
-		}
-		set
-		{
-			if ((this._nombreUsuario != value))
-			{
-				this.OnnombreUsuarioChanging(value);
-				this.SendPropertyChanging();
-				this._nombreUsuario = value;
-				this.SendPropertyChanged("nombreUsuario");
-				this.OnnombreUsuarioChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string password
-	{
-		get
-		{
-			return this._password;
-		}
-		set
-		{
-			if ((this._password != value))
-			{
-				this.OnpasswordChanging(value);
-				this.SendPropertyChanging();
-				this._password = value;
-				this.SendPropertyChanged("password");
-				this.OnpasswordChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreEmpleado", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string nombreEmpleado
-	{
-		get
-		{
-			return this._nombreEmpleado;
-		}
-		set
-		{
-			if ((this._nombreEmpleado != value))
-			{
-				this.OnnombreEmpleadoChanging(value);
-				this.SendPropertyChanging();
-				this._nombreEmpleado = value;
-				this.SendPropertyChanged("nombreEmpleado");
-				this.OnnombreEmpleadoChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_apellidoEmpleado", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string apellidoEmpleado
-	{
-		get
-		{
-			return this._apellidoEmpleado;
-		}
-		set
-		{
-			if ((this._apellidoEmpleado != value))
-			{
-				this.OnapellidoEmpleadoChanging(value);
-				this.SendPropertyChanging();
-				this._apellidoEmpleado = value;
-				this.SendPropertyChanged("apellidoEmpleado");
-				this.OnapellidoEmpleadoChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string email
-	{
-		get
-		{
-			return this._email;
-		}
-		set
-		{
-			if ((this._email != value))
-			{
-				this.OnemailChanging(value);
-				this.SendPropertyChanging();
-				this._email = value;
-				this.SendPropertyChanged("email");
-				this.OnemailChanged();
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
 	}
 }
 
@@ -2058,6 +1876,188 @@ public partial class Rubro : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.Rubro1 = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Usuario")]
+public partial class Usuario : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _id_usuario;
+	
+	private string _nombreUsuario;
+	
+	private string _password;
+	
+	private string _nombreEmpleado;
+	
+	private string _apellidoEmpleado;
+	
+	private string _email;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_usuarioChanging(int value);
+    partial void Onid_usuarioChanged();
+    partial void OnnombreUsuarioChanging(string value);
+    partial void OnnombreUsuarioChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    partial void OnnombreEmpleadoChanging(string value);
+    partial void OnnombreEmpleadoChanged();
+    partial void OnapellidoEmpleadoChanging(string value);
+    partial void OnapellidoEmpleadoChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    #endregion
+	
+	public Usuario()
+	{
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_usuario", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int id_usuario
+	{
+		get
+		{
+			return this._id_usuario;
+		}
+		set
+		{
+			if ((this._id_usuario != value))
+			{
+				this.Onid_usuarioChanging(value);
+				this.SendPropertyChanging();
+				this._id_usuario = value;
+				this.SendPropertyChanged("id_usuario");
+				this.Onid_usuarioChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreUsuario", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string nombreUsuario
+	{
+		get
+		{
+			return this._nombreUsuario;
+		}
+		set
+		{
+			if ((this._nombreUsuario != value))
+			{
+				this.OnnombreUsuarioChanging(value);
+				this.SendPropertyChanging();
+				this._nombreUsuario = value;
+				this.SendPropertyChanged("nombreUsuario");
+				this.OnnombreUsuarioChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string password
+	{
+		get
+		{
+			return this._password;
+		}
+		set
+		{
+			if ((this._password != value))
+			{
+				this.OnpasswordChanging(value);
+				this.SendPropertyChanging();
+				this._password = value;
+				this.SendPropertyChanged("password");
+				this.OnpasswordChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nombreEmpleado", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string nombreEmpleado
+	{
+		get
+		{
+			return this._nombreEmpleado;
+		}
+		set
+		{
+			if ((this._nombreEmpleado != value))
+			{
+				this.OnnombreEmpleadoChanging(value);
+				this.SendPropertyChanging();
+				this._nombreEmpleado = value;
+				this.SendPropertyChanged("nombreEmpleado");
+				this.OnnombreEmpleadoChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_apellidoEmpleado", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string apellidoEmpleado
+	{
+		get
+		{
+			return this._apellidoEmpleado;
+		}
+		set
+		{
+			if ((this._apellidoEmpleado != value))
+			{
+				this.OnapellidoEmpleadoChanging(value);
+				this.SendPropertyChanging();
+				this._apellidoEmpleado = value;
+				this.SendPropertyChanged("apellidoEmpleado");
+				this.OnapellidoEmpleadoChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string email
+	{
+		get
+		{
+			return this._email;
+		}
+		set
+		{
+			if ((this._email != value))
+			{
+				this.OnemailChanging(value);
+				this.SendPropertyChanging();
+				this._email = value;
+				this.SendPropertyChanged("email");
+				this.OnemailChanged();
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }
 #pragma warning restore 1591

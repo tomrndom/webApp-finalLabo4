@@ -290,6 +290,7 @@ __pycache__/
 #Theme files
 plugins/
 scss/
-js/
+js/*
+!js/script.js
 images/
 css/

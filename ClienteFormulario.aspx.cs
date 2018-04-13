@@ -7,8 +7,15 @@ using System.Web.UI.WebControls;
 
 public partial class ClienteFormulario : System.Web.UI.Page
 {
+
+    string lat;
+    string lng;
+
     protected void Page_Load(object sender, EventArgs e)
     {
+        lat = hiddenLat.Value;
+        lng = hiddenLng.Value;
+
         if (Request.QueryString["id"] == null)
         {
             titulo.InnerHtml = "Nuevo Cliente";
@@ -34,6 +41,8 @@ public partial class ClienteFormulario : System.Web.UI.Page
                 txtCalle.Text = dom.calle;
                 txtNro.Text = dom.numero.ToString();
                 txtLocalidad.Text = dom.localidad;
+                lat = dom.latitud;
+                lng = dom.longitud;
             }
         }
     }
@@ -49,6 +58,8 @@ public partial class ClienteFormulario : System.Web.UI.Page
             dom.calle = txtCalle.Text;
             dom.numero = Convert.ToInt32(txtNro.Text);
             dom.localidad = txtLocalidad.Text;
+            dom.latitud = lat;
+            dom.longitud = lng;
             db.SubmitChanges();
             
             Cliente cli = new Cliente();
@@ -79,6 +90,8 @@ public partial class ClienteFormulario : System.Web.UI.Page
             dom.calle = txtCalle.Text;
             dom.numero = Convert.ToInt32(txtNro.Text);
             dom.localidad = txtLocalidad.Text;
+            dom.latitud = lat;
+            dom.longitud = lng;
             db.SubmitChanges();
             
         }

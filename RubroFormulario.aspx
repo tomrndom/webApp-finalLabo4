@@ -44,6 +44,8 @@
                     <br />
                     <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar" CssClass="btn bg-blue actions waves-effect" />
 
+                    <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" CausesValidation="false" CssClass="btn bg-blue actions waves-effect" />
+
                 </div>
             </div>
         </div>

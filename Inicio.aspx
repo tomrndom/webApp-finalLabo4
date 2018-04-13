@@ -22,7 +22,7 @@
                             </div>
                             <div class="content">
                                 <div class="text">Pedidos Activos</div>
-                                <div class="number">10</div>
+                                <div class="number" id="mostrar_pedidos" runat="server">10</div>
                             </div>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="content">
                                     <div class="text">Articulos</div>
-                                    <div class="number">2</div>
+                                    <div class="number" id="mostrar_articulos" runat="server">2</div>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="content">
                                     <div class="text">Rubros</div>
-                                    <div class="number">6</div>
+                                    <div class="number" id="mostrar_rubros" runat="server">6</div>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="content">
                                     <div class="text">Clientes</div>
-                                    <div class="number">5</div>
+                                    <div class="number" id="mostrar_clientes" runat="server">5</div>
                                 </div>
                             </div>
                         </div>

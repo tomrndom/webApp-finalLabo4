@@ -181,6 +181,9 @@
     <!-- Demo Js -->
     <script src="../../js/demo.js"></script>
 
+    <!-- Demo Js -->
+    <script src="../../js/script.js"></script>
+
     <!-- Leer página activa -->
     <script type="text/javascript">
         $(document).ready(function () {
@@ -193,5 +196,10 @@
             });
         });
     </script>
+
+    <!-- Google Maps -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE61diOemAyMJSb2w6gEzNzlKyr_cWmZQ&callback=initMap" async
+        defer>
+        </script>
 </body>
 </html>

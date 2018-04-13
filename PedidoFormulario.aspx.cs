@@ -34,7 +34,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
 
 
             // Solo lectura
-            txtSubTotal.ReadOnly = true;
+        txtSubTotal.ReadOnly = true;
         txtSubTotal.BackColor = System.Drawing.SystemColors.Window;
         txtGastosEnvio.ReadOnly = true;
         txtGastosEnvio.BackColor = System.Drawing.SystemColors.Window;

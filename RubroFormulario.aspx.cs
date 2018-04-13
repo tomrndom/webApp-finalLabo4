@@ -28,9 +28,7 @@ public partial class RubroFormulario : System.Web.UI.Page
         /*ListItem item = new ListItem("", "-1");
         ddlRubroPri.Items.Insert(0, item);
 
-        PedidosDataContext db = new PedidosDataContext();      */  
-
-        
+        PedidosDataContext db = new PedidosDataContext();      */          
     }
 
 
@@ -86,6 +84,7 @@ public partial class RubroFormulario : System.Web.UI.Page
                 ddlRubroPri.DataSource = ListaRubro;
                 ddlRubroPri.DataValueField = "id_rubro";
                 ddlRubroPri.DataTextField = "denominacion";
+                ddlRubroPri.SelectedValue = "-1";
                 ddlRubroPri.DataBind();
 
 
@@ -114,7 +113,7 @@ public partial class RubroFormulario : System.Web.UI.Page
             }
             else
             {
-                ru.id_rubroPrimario = ddlRubroPri.SelectedIndex;                
+                ru.id_rubroPrimario = Convert.ToInt32(ddlRubroPri.SelectedValue);
             }            
             db.SubmitChanges();
         }
@@ -139,6 +138,11 @@ public partial class RubroFormulario : System.Web.UI.Page
 
         }
 
+        Response.Redirect("Rubros.aspx");
+    }
+
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
         Response.Redirect("Rubros.aspx");
     }
 }

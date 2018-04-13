@@ -35,7 +35,7 @@ public partial class ArticuloFormulario : System.Web.UI.Page
                 txtPrecioCompra.Text = temp.precioCompra.ToString();
                 txtPrecioVenta.Text = temp.precioVenta.ToString();
                 txtIva.Text = temp.iva.ToString();
-                ddlRubro.SelectedIndex = temp.id_rubro;           
+                ddlRubro.SelectedValue = temp.id_rubro.ToString();           
             }
         }
 
@@ -72,7 +72,7 @@ public partial class ArticuloFormulario : System.Web.UI.Page
             art.precioVenta = Convert.ToDecimal(txtPrecioVenta.Text);
             art.iva = Convert.ToDecimal(txtIva.Text);                                 
             db.Articulos.InsertOnSubmit(art);
-            art.id_rubro = ddlRubro.SelectedIndex;  
+            art.id_rubro = Convert.ToInt32(ddlRubro.SelectedValue);  
             db.SubmitChanges();
         }
         else
@@ -88,7 +88,7 @@ public partial class ArticuloFormulario : System.Web.UI.Page
             temp.iva = Convert.ToDecimal(txtIva.Text);
             if (ddlRubro.SelectedIndex != -1)
             {
-                temp.id_rubro = ddlRubro.SelectedIndex;
+                temp.id_rubro = Convert.ToInt32(ddlRubro.SelectedValue);
             }
             else {
                 temp.id_rubro = 0;

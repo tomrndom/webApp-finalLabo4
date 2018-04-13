@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                            <asp:TextBox ID="txtCantidad" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtCantidad" runat="server" placeholder="Cantidad"></asp:TextBox>
                             <asp:RequiredFieldValidator ValidationGroup="agregarItem" ID="RequiredFieldValidator7" runat="server" ControlToValidate="txtCantidad" ErrorMessage="* Este campo es obligatorio" Display="Dynamic" CssClass="font-bold col-red" />
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">

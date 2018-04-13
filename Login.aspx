@@ -1,4 +1,4 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="index" EnableEventValidation="false" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="index" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 
@@ -47,7 +47,7 @@
                             <asp:TextBox ID="txtUsuario" runat="server" name="usuario" placeholder="Usuario" class="form-control" autofocus/><br />                            
                         </div>
                         <asp:RequiredFieldValidator ID="rfvUsuario" runat="server" ControlToValidate="txtUsuario" ErrorMessage="* Este campo es obligatorio" Display="Dynamic" CssClass="font-bold col-red" />                                                        
-                            <asp:CustomValidator ID="cstvUsuario" runat="server" OnServerValidate="cstvUsuario_ServerValidate" ErrorMessage="* La contraseña no es correcta" Display="Dynamic" CssClass="font-bold col-red" />
+                            <asp:CustomValidator ID="cstvUsuario" runat="server" OnServerValidate="cstvUsuario_ServerValidate" ErrorMessage="* El usuario no existe" Display="Dynamic" CssClass="font-bold col-red" />
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon">

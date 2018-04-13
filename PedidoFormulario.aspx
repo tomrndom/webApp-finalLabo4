@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="PedidoFormulario.aspx.cs" Inherits="PedidoFormulario" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="PedidoFormulario.aspx.cs" Inherits="PedidoFormulario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -142,3 +142,4 @@
     </div>
     </div>
 </asp:Content>
+

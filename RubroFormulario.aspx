@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="RubroFormulario.aspx.cs" Inherits="RubroFormulario" Explicit="true"%>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="RubroFormulario.aspx.cs" Inherits="RubroFormulario" Explicit="true"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -37,7 +37,8 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">                            
                             <asp:DropDownList ID="ddlRubroPri" runat="server"  >  
-                            </asp:DropDownList>                    
+                            </asp:DropDownList>
+                    <%--  --%>
                         </div>
                     </div>
 

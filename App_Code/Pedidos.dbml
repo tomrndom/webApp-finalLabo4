@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Laboratorio4" Class="PedidosDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+<?xml version="1.0" encoding="utf-8"?><Database Name="Laboratorio4" Class="PedidosDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-TOM\SQLEXPRESS;Initial Catalog=Laboratorio4;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Laboratorio4ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Articulo" Member="Articulos">
     <Type Name="Articulo">

@@ -37,19 +37,17 @@
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <asp:Label>Calle</asp:Label>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <asp:TextBox ID="txtCalle" runat="server" CssClass="input" style="width: 100%;" />    
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtCalle" ErrorMessage="* Este campo es obligatorio" Display="Dynamic" CssClass="font-bold col-red" />
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <asp:Label>Nro</asp:Label>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <asp:TextBox ID="txtNro" runat="server" CssClass="input" style="width: 100%;" />    
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtNro" ErrorMessage="* Este campo es obligatorio" Display="Dynamic" CssClass="font-bold col-red" />
-                        </div>
+                        </div>                                            
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">

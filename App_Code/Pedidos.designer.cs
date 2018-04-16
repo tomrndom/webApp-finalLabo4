@@ -32,9 +32,6 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
   partial void InsertArticulo(Articulo instance);
   partial void UpdateArticulo(Articulo instance);
   partial void DeleteArticulo(Articulo instance);
-  partial void InsertRubro(Rubro instance);
-  partial void UpdateRubro(Rubro instance);
-  partial void DeleteRubro(Rubro instance);
   partial void InsertCliente(Cliente instance);
   partial void UpdateCliente(Cliente instance);
   partial void DeleteCliente(Cliente instance);
@@ -53,6 +50,9 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
   partial void InsertUsuario(Usuario instance);
   partial void UpdateUsuario(Usuario instance);
   partial void DeleteUsuario(Usuario instance);
+  partial void InsertRubro(Rubro instance);
+  partial void UpdateRubro(Rubro instance);
+  partial void DeleteRubro(Rubro instance);
   #endregion
 	
 	public PedidosDataContext() : 
@@ -90,14 +90,6 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<Articulo>();
-		}
-	}
-	
-	public System.Data.Linq.Table<Rubro> Rubro
-	{
-		get
-		{
-			return this.GetTable<Rubro>();
 		}
 	}
 	
@@ -146,6 +138,14 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<Usuario>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Rubro> Rubro
+	{
+		get
+		{
+			return this.GetTable<Rubro>();
 		}
 	}
 }
@@ -422,241 +422,6 @@ public partial class Articulo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		this.SendPropertyChanging();
 		entity.Articulo = null;
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rubro")]
-public partial class Rubro : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _id_rubro;
-	
-	private string _codigo;
-	
-	private string _denominacion;
-	
-	private System.Nullable<int> _id_rubroPrimario;
-	
-	private EntitySet<Articulo> _Articulo;
-	
-	private EntityRef<Rubro> _Rubro2;
-	
-	private EntityRef<Rubro> _Rubro1;
-	
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onid_rubroChanging(int value);
-    partial void Onid_rubroChanged();
-    partial void OncodigoChanging(string value);
-    partial void OncodigoChanged();
-    partial void OndenominacionChanging(string value);
-    partial void OndenominacionChanged();
-    partial void Onid_rubroPrimarioChanging(System.Nullable<int> value);
-    partial void Onid_rubroPrimarioChanged();
-    #endregion
-	
-	public Rubro()
-	{
-		this._Articulo = new EntitySet<Articulo>(new Action<Articulo>(this.attach_Articulo), new Action<Articulo>(this.detach_Articulo));
-		this._Rubro2 = default(EntityRef<Rubro>);
-		this._Rubro1 = default(EntityRef<Rubro>);
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_rubro", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int id_rubro
-	{
-		get
-		{
-			return this._id_rubro;
-		}
-		set
-		{
-			if ((this._id_rubro != value))
-			{
-				if (this._Rubro1.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.Onid_rubroChanging(value);
-				this.SendPropertyChanging();
-				this._id_rubro = value;
-				this.SendPropertyChanged("id_rubro");
-				this.Onid_rubroChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_codigo", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
-	public string codigo
-	{
-		get
-		{
-			return this._codigo;
-		}
-		set
-		{
-			if ((this._codigo != value))
-			{
-				this.OncodigoChanging(value);
-				this.SendPropertyChanging();
-				this._codigo = value;
-				this.SendPropertyChanged("codigo");
-				this.OncodigoChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_denominacion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string denominacion
-	{
-		get
-		{
-			return this._denominacion;
-		}
-		set
-		{
-			if ((this._denominacion != value))
-			{
-				this.OndenominacionChanging(value);
-				this.SendPropertyChanging();
-				this._denominacion = value;
-				this.SendPropertyChanged("denominacion");
-				this.OndenominacionChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_rubroPrimario", DbType="Int")]
-	public System.Nullable<int> id_rubroPrimario
-	{
-		get
-		{
-			return this._id_rubroPrimario;
-		}
-		set
-		{
-			if ((this._id_rubroPrimario != value))
-			{
-				this.Onid_rubroPrimarioChanging(value);
-				this.SendPropertyChanging();
-				this._id_rubroPrimario = value;
-				this.SendPropertyChanged("id_rubroPrimario");
-				this.Onid_rubroPrimarioChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Articulo", Storage="_Articulo", ThisKey="id_rubro", OtherKey="id_rubro")]
-	public EntitySet<Articulo> Articulo
-	{
-		get
-		{
-			return this._Articulo;
-		}
-		set
-		{
-			this._Articulo.Assign(value);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Rubro", Storage="_Rubro2", ThisKey="id_rubro", OtherKey="id_rubro", IsUnique=true, IsForeignKey=false)]
-	public Rubro Rubro2
-	{
-		get
-		{
-			return this._Rubro2.Entity;
-		}
-		set
-		{
-			Rubro previousValue = this._Rubro2.Entity;
-			if (((previousValue != value) 
-						|| (this._Rubro2.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._Rubro2.Entity = null;
-					previousValue.Rubro1 = null;
-				}
-				this._Rubro2.Entity = value;
-				if ((value != null))
-				{
-					value.Rubro1 = this;
-				}
-				this.SendPropertyChanged("Rubro2");
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Rubro", Storage="_Rubro1", ThisKey="id_rubro", OtherKey="id_rubro", IsForeignKey=true)]
-	public Rubro Rubro1
-	{
-		get
-		{
-			return this._Rubro1.Entity;
-		}
-		set
-		{
-			Rubro previousValue = this._Rubro1.Entity;
-			if (((previousValue != value) 
-						|| (this._Rubro1.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._Rubro1.Entity = null;
-					previousValue.Rubro2 = null;
-				}
-				this._Rubro1.Entity = value;
-				if ((value != null))
-				{
-					value.Rubro2 = this;
-					this._id_rubro = value.id_rubro;
-				}
-				else
-				{
-					this._id_rubro = default(int);
-				}
-				this.SendPropertyChanged("Rubro1");
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
-	
-	private void attach_Articulo(Articulo entity)
-	{
-		this.SendPropertyChanging();
-		entity.Rubro = this;
-	}
-	
-	private void detach_Articulo(Articulo entity)
-	{
-		this.SendPropertyChanging();
-		entity.Rubro = null;
 	}
 }
 
@@ -2186,6 +1951,241 @@ public partial class Usuario : INotifyPropertyChanging, INotifyPropertyChanged
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rubro")]
+public partial class Rubro : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _id_rubro;
+	
+	private string _codigo;
+	
+	private string _denominacion;
+	
+	private System.Nullable<int> _id_rubroPrimario;
+	
+	private EntitySet<Articulo> _Articulo;
+	
+	private EntityRef<Rubro> _Rubro2;
+	
+	private EntityRef<Rubro> _Rubro1;
+	
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_rubroChanging(int value);
+    partial void Onid_rubroChanged();
+    partial void OncodigoChanging(string value);
+    partial void OncodigoChanged();
+    partial void OndenominacionChanging(string value);
+    partial void OndenominacionChanged();
+    partial void Onid_rubroPrimarioChanging(System.Nullable<int> value);
+    partial void Onid_rubroPrimarioChanged();
+    #endregion
+	
+	public Rubro()
+	{
+		this._Articulo = new EntitySet<Articulo>(new Action<Articulo>(this.attach_Articulo), new Action<Articulo>(this.detach_Articulo));
+		this._Rubro2 = default(EntityRef<Rubro>);
+		this._Rubro1 = default(EntityRef<Rubro>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_rubro", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int id_rubro
+	{
+		get
+		{
+			return this._id_rubro;
+		}
+		set
+		{
+			if ((this._id_rubro != value))
+			{
+				if (this._Rubro1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.Onid_rubroChanging(value);
+				this.SendPropertyChanging();
+				this._id_rubro = value;
+				this.SendPropertyChanged("id_rubro");
+				this.Onid_rubroChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_codigo", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+	public string codigo
+	{
+		get
+		{
+			return this._codigo;
+		}
+		set
+		{
+			if ((this._codigo != value))
+			{
+				this.OncodigoChanging(value);
+				this.SendPropertyChanging();
+				this._codigo = value;
+				this.SendPropertyChanged("codigo");
+				this.OncodigoChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_denominacion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string denominacion
+	{
+		get
+		{
+			return this._denominacion;
+		}
+		set
+		{
+			if ((this._denominacion != value))
+			{
+				this.OndenominacionChanging(value);
+				this.SendPropertyChanging();
+				this._denominacion = value;
+				this.SendPropertyChanged("denominacion");
+				this.OndenominacionChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_rubroPrimario", DbType="Int")]
+	public System.Nullable<int> id_rubroPrimario
+	{
+		get
+		{
+			return this._id_rubroPrimario;
+		}
+		set
+		{
+			if ((this._id_rubroPrimario != value))
+			{
+				this.Onid_rubroPrimarioChanging(value);
+				this.SendPropertyChanging();
+				this._id_rubroPrimario = value;
+				this.SendPropertyChanged("id_rubroPrimario");
+				this.Onid_rubroPrimarioChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Articulo", Storage="_Articulo", ThisKey="id_rubro", OtherKey="id_rubro")]
+	public EntitySet<Articulo> Articulo
+	{
+		get
+		{
+			return this._Articulo;
+		}
+		set
+		{
+			this._Articulo.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Rubro", Storage="_Rubro2", ThisKey="id_rubro", OtherKey="id_rubro", IsUnique=true, IsForeignKey=false)]
+	public Rubro Rubro2
+	{
+		get
+		{
+			return this._Rubro2.Entity;
+		}
+		set
+		{
+			Rubro previousValue = this._Rubro2.Entity;
+			if (((previousValue != value) 
+						|| (this._Rubro2.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Rubro2.Entity = null;
+					previousValue.Rubro1 = null;
+				}
+				this._Rubro2.Entity = value;
+				if ((value != null))
+				{
+					value.Rubro1 = this;
+				}
+				this.SendPropertyChanged("Rubro2");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Rubro", Storage="_Rubro1", ThisKey="id_rubro", OtherKey="id_rubro", IsForeignKey=true)]
+	public Rubro Rubro1
+	{
+		get
+		{
+			return this._Rubro1.Entity;
+		}
+		set
+		{
+			Rubro previousValue = this._Rubro1.Entity;
+			if (((previousValue != value) 
+						|| (this._Rubro1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Rubro1.Entity = null;
+					previousValue.Rubro2 = null;
+				}
+				this._Rubro1.Entity = value;
+				if ((value != null))
+				{
+					value.Rubro2 = this;
+					this._id_rubro = value.id_rubro;
+				}
+				else
+				{
+					this._id_rubro = default(int);
+				}
+				this.SendPropertyChanged("Rubro1");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_Articulo(Articulo entity)
+	{
+		this.SendPropertyChanging();
+		entity.Rubro = this;
+	}
+	
+	private void detach_Articulo(Articulo entity)
+	{
+		this.SendPropertyChanging();
+		entity.Rubro = null;
 	}
 }
 #pragma warning restore 1591

@@ -15,11 +15,7 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <asp:Label>Número de Pedido</asp:Label>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            <asp:TextBox ID="txtNroPedido" runat="server" Style="width: 100%; readonly" />
-                            <asp:RequiredFieldValidator ValidationGroup="pedido" ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtNroPedido" ErrorMessage="* Este campo es obligatorio" Display="Dynamic" CssClass="font-bold col-red" />
-                        </div>
+                        </div>                        
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                             <asp:Label>Fecha del Pedido</asp:Label>
                         </div>
@@ -33,7 +29,7 @@
                             <asp:Label>Cliente</asp:Label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <asp:DropDownList ID="ddlCliente" runat="server" DataSourceID="SqlDataSource1" DataTextField="razonSocial" DataValueField="id_cliente" CssClass="input" AppendDataBoundItems="true"></asp:DropDownList>
+                            <asp:DropDownList ID="ddlCliente" runat="server" autopostback="true" DataSourceID="SqlDataSource1" DataTextField="razonSocial" DataValueField="id_cliente" CssClass="input" AppendDataBoundItems="true" OnSelectedIndexChanged="buscarDomicilio"></asp:DropDownList>
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Laboratorio4ConnectionString %>" SelectCommand="SELECT * FROM [Cliente]"></asp:SqlDataSource>
                             <asp:RequiredFieldValidator ValidationGroup="pedido" ID="rfvCliente" runat="server" ControlToValidate="ddlCliente" ErrorMessage="* Este campo es obligatorio" Display="Dynamic" CssClass="font-bold col-red" />
                         </div>
@@ -41,8 +37,7 @@
                             <asp:Label>Domicilio</asp:Label>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                            <asp:DropDownList ID="ddlDomicilio" runat="server" DataSourceID="SqlDataSource1" DataTextField="calle" DataValueField="id_cliente" CssClass="input" AppendDataBoundItems="true"></asp:DropDownList>
-                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Laboratorio4ConnectionString %>" SelectCommand="SELECT Cliente.id_cliente, Domicilio.id_domicilio AS Expr1, Domicilio.calle, Domicilio.numero, Domicilio.localidad, Domicilio.latitud, Domicilio.longitud, Domicilio.tipo_domicilio, Domicilio.id_cliente FROM Cliente INNER JOIN Domicilio ON Cliente.id_cliente = Domicilio.id_cliente"></asp:SqlDataSource>
+                            <asp:DropDownList ID="ddlDomicilio"  runat="server" CssClass="input" AppendDataBoundItems="true"></asp:DropDownList>                            
                             <asp:RequiredFieldValidator ValidationGroup="pedido" ID="rfvDomicilio" runat="server" ControlToValidate="ddlDomicilio" ErrorMessage="* Este campo es obligatorio" Display="Dynamic" CssClass="font-bold col-red" />
                         </div>
                     </div>

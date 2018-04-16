@@ -8,12 +8,6 @@
         <elementListCompartment Id="ee501fff-b079-4ecb-9d40-a1db53e137e0" absoluteBounds="6.265, 5.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d99abded-d659-4b0f-9edd-f82a3d420971" absoluteBounds="3.5, 5.625, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/PedidosDataContext/Rubro" />
-      <nestedChildShapes>
-        <elementListCompartment Id="8963788b-47e6-4f5d-97e4-39b1f9e92629" absoluteBounds="3.515, 6.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="0289202d-74d7-4954-ae01-13faafd0a631" absoluteBounds="0.75, 1.625, 2, 1.5785953776041666">
       <DataClassMoniker Name="/PedidosDataContext/Cliente" />
       <nestedChildShapes>
@@ -50,20 +44,6 @@
         <elementListCompartment Id="19936268-a278-4144-97db-f4797d9ec747" absoluteBounds="3.765, 9.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 6.41429768880208); (6.25 : 6.41429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/PedidosDataContext/Rubro/Rubro_Articulo" />
-      <nodes>
-        <classShapeMoniker Id="d99abded-d659-4b0f-9edd-f82a3d420971" />
-        <classShapeMoniker Id="771db1ff-2aeb-4515-8932-5cc4619390f9" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(4.20242346379207 : 7.20359537760417); (4.20242346379207 : 7.45359537760417); (4.81174684745593 : 7.45359537760417); (4.81174684745593 : 7.20359537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/PedidosDataContext/Rubro/Rubro_Rubro" />
-      <nodes>
-        <classShapeMoniker Id="d99abded-d659-4b0f-9edd-f82a3d420971" />
-        <classShapeMoniker Id="d99abded-d659-4b0f-9edd-f82a3d420971" />
-      </nodes>
-    </associationConnector>
     <associationConnector edgePoints="[(2.75 : 2.41429768880208); (3.5 : 2.41429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/PedidosDataContext/Cliente/Cliente_Domicilio" />
       <nodes>
@@ -71,32 +51,52 @@
         <classShapeMoniker Id="9150776b-efaf-44db-a8db-7779d5282005" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(1.75 : 3.20359537760417); (1.75 : 3.79250325520833); (6.25 : 3.79250325520833)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(1.75 : 3.20359537760417); (1.75 : 3.79250325520833); (6.25 : 3.79250325520833)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PedidosDataContext/Cliente/Cliente_PedidoVenta" />
       <nodes>
         <classShapeMoniker Id="0289202d-74d7-4954-ae01-13faafd0a631" />
         <classShapeMoniker Id="c9a22ccb-3a9f-4044-b6b2-3551a95c3703" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 2.42390055338542); (6.25 : 2.42390055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.42390055338542); (6.25 : 2.42390055338542)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PedidosDataContext/Domicilio/Domicilio_PedidoVenta" />
       <nodes>
         <classShapeMoniker Id="9150776b-efaf-44db-a8db-7779d5282005" />
         <classShapeMoniker Id="c9a22ccb-3a9f-4044-b6b2-3551a95c3703" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 6.45274983723958); (10 : 6.45274983723958); (10 : 3.4631982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 6.45274983723958); (10 : 6.45274983723958); (10 : 3.4631982421875)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PedidosDataContext/Articulo/Articulo_PedidoVentaDetalle" />
       <nodes>
         <classShapeMoniker Id="771db1ff-2aeb-4515-8932-5cc4619390f9" />
         <classShapeMoniker Id="1a0ab525-8ee6-4249-9bc9-588d9ec0e1ee" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 2.48159912109375); (9 : 2.48159912109375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 2.48159912109375); (9 : 2.48159912109375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/PedidosDataContext/PedidoVenta/PedidoVenta_PedidoVentaDetalle" />
       <nodes>
         <classShapeMoniker Id="c9a22ccb-3a9f-4044-b6b2-3551a95c3703" />
         <classShapeMoniker Id="1a0ab525-8ee6-4249-9bc9-588d9ec0e1ee" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b4570de1-f0e6-43f4-883c-c00c1fc64972" absoluteBounds="3.125, 5.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/PedidosDataContext/Rubro" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0ead0397-5026-4660-ad27-92dc01b37e78" absoluteBounds="3.1399999999999997, 6.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.125 : 6.53929768880208); (6.25 : 6.53929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/PedidosDataContext/Rubro/Rubro_Articulo" />
+      <nodes>
+        <classShapeMoniker Id="b4570de1-f0e6-43f4-883c-c00c1fc64972" />
+        <classShapeMoniker Id="771db1ff-2aeb-4515-8932-5cc4619390f9" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.82742346379207 : 7.32859537760417); (3.82742346379207 : 7.57859537760417); (4.43674684745593 : 7.57859537760417); (4.43674684745593 : 7.32859537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/PedidosDataContext/Rubro/Rubro_Rubro" />
+      <nodes>
+        <classShapeMoniker Id="b4570de1-f0e6-43f4-883c-c00c1fc64972" />
+        <classShapeMoniker Id="b4570de1-f0e6-43f4-883c-c00c1fc64972" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

@@ -13,17 +13,6 @@
       <Association Name="Rubro_Articulo" Member="Rubro" ThisKey="id_rubro" OtherKey="id_rubro" Type="Rubro" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Rubro" Member="Rubro">
-    <Type Name="Rubro">
-      <Column Name="id_rubro" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="codigo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
-      <Column Name="denominacion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="id_rubroPrimario" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Rubro_Articulo" Member="Articulo" ThisKey="id_rubro" OtherKey="id_rubro" Type="Articulo" />
-      <Association Name="Rubro_Rubro" Member="Rubro2" ThisKey="id_rubro" OtherKey="id_rubro" Type="Rubro" Cardinality="One" />
-      <Association Name="Rubro_Rubro" Member="Rubro1" ThisKey="id_rubro" OtherKey="id_rubro" Type="Rubro" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Cliente" Member="Cliente">
     <Type Name="Cliente">
       <Column Name="id_cliente" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -96,6 +85,17 @@
       <Column Name="nombreEmpleado" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="apellidoEmpleado" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Rubro" Member="Rubro">
+    <Type Name="Rubro">
+      <Column Name="id_rubro" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="codigo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="denominacion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="id_rubroPrimario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Rubro_Articulo" Member="Articulo" ThisKey="id_rubro" OtherKey="id_rubro" Type="Articulo" />
+      <Association Name="Rubro_Rubro" Member="Rubro2" ThisKey="id_rubro" OtherKey="id_rubro" Type="Rubro" Cardinality="One" />
+      <Association Name="Rubro_Rubro" Member="Rubro1" ThisKey="id_rubro" OtherKey="id_rubro" Type="Rubro" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

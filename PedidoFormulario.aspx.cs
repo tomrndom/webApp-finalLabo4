@@ -30,9 +30,10 @@ public partial class PedidoFormulario : System.Web.UI.Page
         {
             cargarArticulos();
             detallePedido = new List<DTOPedidoVentaDetalle>();
+            txtPedidoFecha.Text = DateTime.Now.Date.ToString();
         }
-
-
+       
+            
             // Solo lectura
         txtSubTotal.ReadOnly = true;
         txtSubTotal.BackColor = System.Drawing.SystemColors.Window;
@@ -72,11 +73,17 @@ public partial class PedidoFormulario : System.Web.UI.Page
         {
             using (var context = new PedidosDataContext())
             {
+                Articulo iArtSel = new Articulo();
+                iArtSel.denominacion = "Seleccione un artículo";
+                iArtSel.id_articulo = -1;
                 var listaArticulos = (from lArt in context.Articulo select lArt).ToList();
+                listaArticulos.Add(iArtSel);
+
                 ddlArticulos.DataSource = listaArticulos;
                 ddlArticulos.DataValueField = "id_articulo";
                 ddlArticulos.DataTextField = "denominacion";
                 ddlArticulos.DataBind();
+                ddlArticulos.SelectedValue = "-1";
             }
                 
         }
@@ -172,5 +179,35 @@ public partial class PedidoFormulario : System.Web.UI.Page
             txtPrecio.Text = (from iArt in context.Articulo where iArt.id_articulo == int.Parse(ddlArticulos.SelectedValue) select iArt.precioCompra).SingleOrDefault().ToString();
         }
             
+    }
+
+    protected void buscarDomicilio(object sender, EventArgs e)
+    {
+        try
+        {
+            using (var context = new PedidosDataContext())
+            {
+                var listaDomiccilios = (from lDom in context.Domicilio
+                                        where lDom.id_cliente == Convert.ToInt32(ddlCliente.SelectedValue)
+                                        select lDom).ToList();
+
+                foreach (Domicilio idom in listaDomiccilios)
+                {
+                    idom.calle = idom.calle + " " + idom.numero;
+                }
+
+                ddlDomicilio.Items.Clear();
+                ddlDomicilio.DataSource = listaDomiccilios;
+                ddlDomicilio.DataValueField = "id_domicilio";
+                ddlDomicilio.DataTextField = "calle";
+                ddlDomicilio.DataBind();
+            }
+
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
 }

@@ -30,7 +30,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="btnBorrar" Text="<i class='material-icons'>delete</i>" runat="server" OnClientClick="return confirm('¿Esta seguro que quiere borrar a este cliente?')" OnCommand="btnBorrar_Command"  CommandArgument='<%# Eval("id_rubro") %>' ImageAlign="Left"></asp:LinkButton>                                    
+                                    <asp:LinkButton ID="btnBorrar" Text="<i class='material-icons'>delete</i>" runat="server" OnClientClick="return confirm('¿Esta seguro que quiere borrar a este rubro?')" OnCommand="btnBorrar_Command"  CommandArgument='<%# Eval("id_rubro") %>' ImageAlign="Left"></asp:LinkButton>                                    
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>               

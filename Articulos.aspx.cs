@@ -26,11 +26,11 @@ public partial class Articulos : System.Web.UI.Page
         PedidosDataContext db = new PedidosDataContext();
         int idSeleccionado = Convert.ToInt32(e.CommandArgument.ToString());
 
-        var temp = (from art in db.Articulos
+        var temp = (from art in db.Articulo
                     where art.id_articulo== idSeleccionado
                     select art).Single();
 
-        db.Articulos.DeleteOnSubmit(temp);
+        db.Articulo.DeleteOnSubmit(temp);
         db.SubmitChanges();
         gridArticulos.DataBind();
     }

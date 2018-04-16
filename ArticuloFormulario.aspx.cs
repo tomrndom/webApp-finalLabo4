@@ -24,7 +24,7 @@ public partial class ArticuloFormulario : System.Web.UI.Page
         {
             titulo.InnerHtml = "Editar Artículo";
 
-            var temp = (from art in db.Articulos
+            var temp = (from art in db.Articulo
                         where art.id_articulo == Convert.ToInt32(Request.QueryString["id"])
                         select art).Single();
 
@@ -65,41 +65,65 @@ public partial class ArticuloFormulario : System.Web.UI.Page
 
         if (Request.QueryString["id"] == null)
         {
-            Articulo art = new Articulo();
-            art.codigo = txtCodigo.Text;
-            art.denominacion = txtDenominacion.Text;
-            art.precioCompra = Convert.ToDecimal(txtPrecioCompra.Text);
-            art.precioVenta = Convert.ToDecimal(txtPrecioVenta.Text);
-            art.iva = Convert.ToDecimal(txtIva.Text);                                 
-            db.Articulos.InsertOnSubmit(art);
-            art.id_rubro = Convert.ToInt32(ddlRubro.SelectedValue);  
-            db.SubmitChanges();
+            try
+            {
+                Articulo art = new Articulo();
+                art.codigo = txtCodigo.Text;
+                art.denominacion = txtDenominacion.Text;
+                art.precioCompra = Convert.ToDecimal(txtPrecioCompra.Text);
+                art.precioVenta = Convert.ToDecimal(txtPrecioVenta.Text);
+                art.iva = Convert.ToDecimal(txtIva.Text);
+                db.Articulo.InsertOnSubmit(art);
+                art.id_rubro = Convert.ToInt32(ddlRubro.SelectedValue);
+                db.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
         }
         else
         {
-            var temp = (from art in db.Articulos
-                        where art.id_articulo == Convert.ToInt32(Request.QueryString["id"])
-                        select art).Single();
 
-            temp.codigo = txtCodigo.Text;
-            temp.denominacion = txtDenominacion.Text;
-            temp.precioCompra = Convert.ToDecimal(txtPrecioCompra.Text);
-            temp.precioVenta = Convert.ToDecimal(txtPrecioVenta.Text);
-            temp.iva = Convert.ToDecimal(txtIva.Text);
-            if (ddlRubro.SelectedIndex != -1)
+            try
             {
-                temp.id_rubro = Convert.ToInt32(ddlRubro.SelectedValue);
+                var temp = (from art in db.Articulo
+                            where art.id_articulo == Convert.ToInt32(Request.QueryString["id"])
+                            select art).Single();
+
+                temp.codigo = txtCodigo.Text;
+                temp.denominacion = txtDenominacion.Text;
+                temp.precioCompra = Convert.ToDecimal(txtPrecioCompra.Text);
+                temp.precioVenta = Convert.ToDecimal(txtPrecioVenta.Text);
+                temp.iva = Convert.ToDecimal(txtIva.Text);
+                if (ddlRubro.SelectedIndex != -1)
+                {
+                    temp.id_rubro = Convert.ToInt32(ddlRubro.SelectedValue);
+                }
+                else
+                {
+                    temp.id_rubro = 0;
+                }
+
+                //FALTA RUBRO                        
+                db.SubmitChanges();
             }
-            else {
-                temp.id_rubro = 0;
+            catch (Exception ex)
+            {
+
             }
+
             
-            //FALTA RUBRO                        
-            db.SubmitChanges();
 
         }
 
         Response.Redirect("Articulos.aspx");
+    }
+
+    protected void btnCancelar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Rubros.aspx");
     }
 }
 

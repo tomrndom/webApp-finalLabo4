@@ -22,16 +22,25 @@ public partial class Rubros : System.Web.UI.Page
     }
 
     protected void btnBorrar_Command(object sender, CommandEventArgs e)
-    {
+     {
         PedidosDataContext db = new PedidosDataContext();
         int idSeleccionado = Convert.ToInt32(e.CommandArgument.ToString());
 
-        var temp = (from pac in db.Rubros
-                    where pac.id_rubro == idSeleccionado
-                    select pac).Single();
+        try
+        {
+            var temp = (from pac in db.Rubro
+                        where pac.id_rubro == idSeleccionado
+                        select pac).Single();
 
-        db.Rubros.DeleteOnSubmit(temp);
-        db.SubmitChanges();
-        gridRubros.DataBind();
+            db.Rubro.DeleteOnSubmit(temp);
+            db.SubmitChanges();
+            gridRubros.DataBind();
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+
     }
 }

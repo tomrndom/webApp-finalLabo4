@@ -21,22 +21,24 @@ function initMap() {
     });
     // Marcar con un click la ubicación
     function placeMarker(location) {
-        console.log("hay marker??", marker);
-        if (marker == null) {
+        if (marker === undefined) {
             marker = new google.maps.Marker({
                 position: location,
                 map: map
             });
             latitud = marker.getPosition().lat();
             longitud = marker.getPosition().lng();
+            
+            document.getElementById('hiddenLat').value = latitud;
+            document.getElementById('hiddenLng').value = longitud;
         } else {
             marker.setPosition(location);
             latitud = marker.getPosition().lat();
             longitud = marker.getPosition().lng();
-        }
-
-        document.getElementById("hiddenLat").value = latitud;
-        document.getElementById("hiddenLng").value = longitud;
+            
+            document.getElementById('hiddenLat').value = latitud;
+            document.getElementById('hiddenLng').value = longitud;
+        }                
     }
 }
 
@@ -50,11 +52,10 @@ function codeAddress() {
     console.log(numero);
     console.log(localidad);
 
-    geocoder.geocode({ address: direccion }, function(results, status) {
-        console.log("MARKER EN GEO", marker);
-        if (status == google.maps.GeocoderStatus.OK) {
+    geocoder.geocode({ address: direccion }, function(results, status) {        
+        if (status === google.maps.GeocoderStatus.OK) {
             map.setCenter(results[0].geometry.location);
-            if (marker == null) {
+            if (marker === undefined) {
                 marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
@@ -62,17 +63,20 @@ function codeAddress() {
                 });
                 latitud = marker.getPosition().lat();
                 longitud = marker.getPosition().lng();
+                
+                document.getElementById('hiddenLat').value = latitud;
+                document.getElementById('hiddenLng').value = longitud;
             } else {
                 marker.setPosition(results[0].geometry.location)
                 latitud = marker.getPosition().lat();
                 longitud = marker.getPosition().lng();
+                
+                document.getElementById('hiddenLat').value = latitud;
+                document.getElementById('hiddenLng').value = longitud;
             }
             map.setZoom(16);
         } else {
             alert("Error al ubicar la dirección ingresada en el mapa: " + status);
         }
-    });
-
-    document.getElementById("hiddenLat").value = latitud;
-    document.getElementById("hiddenLng").value = longitud;
+    });    
 }

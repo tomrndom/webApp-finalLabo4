@@ -1,10 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="ClienteFormulario.aspx.cs" Inherits="ClienteFormulario" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">        
     <h2 runat="server">Clientes</h2>
-
+    
     <div class="row clearfix">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
@@ -57,10 +58,10 @@
 
                     <input type="button" value="Geoposicionar" onclick="codeAddress()" class="btn bg-blue actions waves-effect" />
                     
-                    <asp:Label CssClass="m-l-20" runat="server">Si la dirección no coincide con la ubicación, puede modificarlo manualmente.</asp:Label>
+                    <asp:Label CssClass="m-l-20 font-bold" runat="server">Si la dirección no coincide con la ubicación, puede modificarlo manualmente.</asp:Label>
 
-                    <asp:HiddenField ID="hiddenLat" runat="server" />
-                    <asp:HiddenField ID="hiddenLng" runat="server" />
+                    <asp:HiddenField ID="hiddenLat" ClientIDMode="Static" runat="server" />
+                    <asp:HiddenField ID="hiddenLng" ClientIDMode="Static" runat="server" />
 
                     <br /><br />
 
@@ -71,6 +72,8 @@
                     <br />
 
                     <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Guardar" CssClass="btn bg-blue actions waves-effect" />
+
+                    <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" CausesValidation="false" CssClass="btn bg-blue actions waves-effect" />
                                                           
                 </div>
             </div>

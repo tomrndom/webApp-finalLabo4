@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Laboratorio4" Class="PedidosDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=35.192.81.198;Initial Catalog=Laboratorio4;Persist Security Info=True;User ID=dotnetapp" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="Laboratorio4ConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Articulo" Member="Articulos">
+  <Table Name="dbo.Articulo" Member="Articulo">
     <Type Name="Articulo">
       <Column Name="id_articulo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="codigo" Type="System.String" DbType="NChar(15) NOT NULL" CanBeNull="false" />
@@ -9,24 +9,42 @@
       <Column Name="precioVenta" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
       <Column Name="iva" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
       <Column Name="id_rubro" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Articulo_PedidoVentaDetalle" Member="PedidoVentaDetalles" ThisKey="id_articulo" OtherKey="id_articulo" Type="PedidoVentaDetalle" />
+      <Association Name="Articulo_PedidoVentaDetalle" Member="PedidoVentaDetalle" ThisKey="id_articulo" OtherKey="id_articulo" Type="PedidoVentaDetalle" />
       <Association Name="Rubro_Articulo" Member="Rubro" ThisKey="id_rubro" OtherKey="id_rubro" Type="Rubro" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Cliente" Member="Clientes">
+  <Table Name="dbo.Rubro" Member="Rubro">
+    <Type Name="Rubro">
+      <Column Name="id_rubro" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="codigo" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="denominacion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="id_rubroPrimario" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Rubro_Articulo" Member="Articulo" ThisKey="id_rubro" OtherKey="id_rubro" Type="Articulo" />
+      <Association Name="Rubro_Rubro" Member="Rubro2" ThisKey="id_rubro" OtherKey="id_rubro" Type="Rubro" Cardinality="One" />
+      <Association Name="Rubro_Rubro" Member="Rubro1" ThisKey="id_rubro" OtherKey="id_rubro" Type="Rubro" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cliente" Member="Cliente">
     <Type Name="Cliente">
       <Column Name="id_cliente" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="razonSocial" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="cuit" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="saldo" Type="System.Decimal" DbType="Decimal(6,2)" CanBeNull="true" />
-      <Column Name="id_domicilio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="id_domicilioNegocio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Cliente_PedidoVenta" Member="PedidoVentas" ThisKey="id_cliente" OtherKey="id_cliente" Type="PedidoVenta" />
-      <Association Name="Domicilio_Cliente" Member="Domicilio" ThisKey="id_domicilio" OtherKey="id_domicilio" Type="Domicilio" IsForeignKey="true" />
-      <Association Name="Domicilio_Cliente1" Member="Domicilio1" ThisKey="id_domicilioNegocio" OtherKey="id_domicilio" Type="Domicilio" IsForeignKey="true" />
+      <Association Name="Cliente_Domicilio" Member="Domicilio" ThisKey="id_cliente" OtherKey="id_cliente" Type="Domicilio" />
+      <Association Name="Cliente_PedidoVenta" Member="PedidoVenta" ThisKey="id_cliente" OtherKey="id_cliente" Type="PedidoVenta" />
     </Type>
   </Table>
-  <Table Name="dbo.Domicilio" Member="Domicilios">
+  <Table Name="dbo.DeviceToken" Member="DeviceToken">
+    <Type Name="DeviceToken">
+      <Column Name="uuid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="model" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="serial" Type="System.String" DbType="VarChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="token" Type="System.String" DbType="VarChar(36) NOT NULL" CanBeNull="false" />
+      <Column Name="fechaCreacion" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="fechaExpiracion" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Domicilio" Member="Domicilio">
     <Type Name="Domicilio">
       <Column Name="id_domicilio" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="calle" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
@@ -34,12 +52,13 @@
       <Column Name="localidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="latitud" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="longitud" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="Domicilio_Cliente" Member="Clientes" ThisKey="id_domicilio" OtherKey="id_domicilio" Type="Cliente" />
-      <Association Name="Domicilio_Cliente1" Member="Clientes1" ThisKey="id_domicilio" OtherKey="id_domicilioNegocio" Type="Cliente" />
-      <Association Name="Domicilio_PedidoVenta" Member="PedidoVentas" ThisKey="id_domicilio" OtherKey="id_domicilio" Type="PedidoVenta" />
+      <Column Name="tipo_domicilio" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="id_cliente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Domicilio_PedidoVenta" Member="PedidoVenta" ThisKey="id_domicilio" OtherKey="id_domicilio" Type="PedidoVenta" />
+      <Association Name="Cliente_Domicilio" Member="Cliente" ThisKey="id_cliente" OtherKey="id_cliente" Type="Cliente" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.PedidoVenta" Member="PedidoVentas">
+  <Table Name="dbo.PedidoVenta" Member="PedidoVenta">
     <Type Name="PedidoVenta">
       <Column Name="id_pedidoVenta" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="fechaEstimadaEntrega" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
@@ -52,12 +71,12 @@
       <Column Name="montoTotal" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
       <Column Name="id_cliente" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="id_domicilio" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="PedidoVenta_PedidoVentaDetalle" Member="PedidoVentaDetalles" ThisKey="id_pedidoVenta" OtherKey="id_pedidoVenta" Type="PedidoVentaDetalle" />
+      <Association Name="PedidoVenta_PedidoVentaDetalle" Member="PedidoVentaDetalle" ThisKey="id_pedidoVenta" OtherKey="id_pedidoVenta" Type="PedidoVentaDetalle" />
       <Association Name="Cliente_PedidoVenta" Member="Cliente" ThisKey="id_cliente" OtherKey="id_cliente" Type="Cliente" IsForeignKey="true" />
       <Association Name="Domicilio_PedidoVenta" Member="Domicilio" ThisKey="id_domicilio" OtherKey="id_domicilio" Type="Domicilio" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.PedidoVentaDetalle" Member="PedidoVentaDetalles">
+  <Table Name="dbo.PedidoVentaDetalle" Member="PedidoVentaDetalle">
     <Type Name="PedidoVentaDetalle">
       <Column Name="id_pedidoVentaDetalle" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="cantidad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -69,18 +88,7 @@
       <Association Name="PedidoVenta_PedidoVentaDetalle" Member="PedidoVenta" ThisKey="id_pedidoVenta" OtherKey="id_pedidoVenta" Type="PedidoVenta" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Rubro" Member="Rubros">
-    <Type Name="Rubro">
-      <Column Name="id_rubro" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="codigo" Type="System.String" DbType="NChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="denominacion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="id_rubroPrimario" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Rubro_Articulo" Member="Articulos" ThisKey="id_rubro" OtherKey="id_rubro" Type="Articulo" />
-      <Association Name="Rubro_Rubro" Member="Rubros" ThisKey="id_rubro" OtherKey="id_rubroPrimario" Type="Rubro" />
-      <Association Name="Rubro_Rubro" Member="Rubro1" ThisKey="id_rubroPrimario" OtherKey="id_rubro" Type="Rubro" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Usuario" Member="Usuarios">
+  <Table Name="dbo.Usuario" Member="Usuario">
     <Type Name="Usuario">
       <Column Name="id_usuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="nombreUsuario" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />

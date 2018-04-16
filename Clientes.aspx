@@ -39,13 +39,18 @@
                                 <ItemTemplate>
                                     <asp:Button ID="btnVerPedidos" runat="server" CssClass="btn bg-blue actions waves-effect align-center" Text="Ver Pedidos" OnCommand="btnVerPedidos_Command" CommandArgument='<%# Eval("id_cliente") %>' />
                                 </ItemTemplate>
-                            </asp:TemplateField>                            
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:Button ID="btnDomicilios" runat="server" CssClass="btn bg-blue actions waves-effect align-center" Text="Domicilios" OnCommand="btnDomicilios_Command" CommandArgument='<%# Eval("id_cliente") %>' />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>                    
                 </div>
             </div>
         </div>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Laboratorio4ConnectionString %>" SelectCommand="SELECT Cliente.id_cliente, Cliente.razonSocial, Cliente.cuit, Cliente.saldo, Cliente.id_domicilio, Cliente.id_domicilioNegocio, Domicilio.id_domicilio AS Expr1, Domicilio.calle, Domicilio.numero, Domicilio.localidad, Domicilio.latitud, Domicilio.longitud FROM Cliente INNER JOIN Domicilio ON Cliente.id_domicilio = Domicilio.id_domicilio AND Cliente.id_domicilioNegocio = Domicilio.id_domicilio"></asp:SqlDataSource>
+        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Laboratorio4ConnectionString %>" SelectCommand="SELECT Cliente.id_cliente, Cliente.razonSocial, Cliente.cuit, Cliente.saldo, Domicilio.id_domicilio AS Expr1, Domicilio.calle, Domicilio.numero, Domicilio.localidad, Domicilio.latitud, Domicilio.longitud, Domicilio.tipo_domicilio, Domicilio.id_cliente FROM Cliente INNER JOIN Domicilio ON Cliente.id_cliente = Domicilio.id_cliente"></asp:SqlDataSource>
     </div>
 </asp:Content>
 

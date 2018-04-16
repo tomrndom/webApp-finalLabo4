@@ -32,9 +32,15 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
   partial void InsertArticulo(Articulo instance);
   partial void UpdateArticulo(Articulo instance);
   partial void DeleteArticulo(Articulo instance);
+  partial void InsertRubro(Rubro instance);
+  partial void UpdateRubro(Rubro instance);
+  partial void DeleteRubro(Rubro instance);
   partial void InsertCliente(Cliente instance);
   partial void UpdateCliente(Cliente instance);
   partial void DeleteCliente(Cliente instance);
+  partial void InsertDeviceToken(DeviceToken instance);
+  partial void UpdateDeviceToken(DeviceToken instance);
+  partial void DeleteDeviceToken(DeviceToken instance);
   partial void InsertDomicilio(Domicilio instance);
   partial void UpdateDomicilio(Domicilio instance);
   partial void DeleteDomicilio(Domicilio instance);
@@ -44,9 +50,6 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
   partial void InsertPedidoVentaDetalle(PedidoVentaDetalle instance);
   partial void UpdatePedidoVentaDetalle(PedidoVentaDetalle instance);
   partial void DeletePedidoVentaDetalle(PedidoVentaDetalle instance);
-  partial void InsertRubro(Rubro instance);
-  partial void UpdateRubro(Rubro instance);
-  partial void DeleteRubro(Rubro instance);
   partial void InsertUsuario(Usuario instance);
   partial void UpdateUsuario(Usuario instance);
   partial void DeleteUsuario(Usuario instance);
@@ -82,7 +85,7 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
 		OnCreated();
 	}
 	
-	public System.Data.Linq.Table<Articulo> Articulos
+	public System.Data.Linq.Table<Articulo> Articulo
 	{
 		get
 		{
@@ -90,39 +93,7 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
 		}
 	}
 	
-	public System.Data.Linq.Table<Cliente> Clientes
-	{
-		get
-		{
-			return this.GetTable<Cliente>();
-		}
-	}
-	
-	public System.Data.Linq.Table<Domicilio> Domicilios
-	{
-		get
-		{
-			return this.GetTable<Domicilio>();
-		}
-	}
-	
-	public System.Data.Linq.Table<PedidoVenta> PedidoVentas
-	{
-		get
-		{
-			return this.GetTable<PedidoVenta>();
-		}
-	}
-	
-	public System.Data.Linq.Table<PedidoVentaDetalle> PedidoVentaDetalles
-	{
-		get
-		{
-			return this.GetTable<PedidoVentaDetalle>();
-		}
-	}
-	
-	public System.Data.Linq.Table<Rubro> Rubros
+	public System.Data.Linq.Table<Rubro> Rubro
 	{
 		get
 		{
@@ -130,7 +101,47 @@ public partial class PedidosDataContext : System.Data.Linq.DataContext
 		}
 	}
 	
-	public System.Data.Linq.Table<Usuario> Usuarios
+	public System.Data.Linq.Table<Cliente> Cliente
+	{
+		get
+		{
+			return this.GetTable<Cliente>();
+		}
+	}
+	
+	public System.Data.Linq.Table<DeviceToken> DeviceToken
+	{
+		get
+		{
+			return this.GetTable<DeviceToken>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Domicilio> Domicilio
+	{
+		get
+		{
+			return this.GetTable<Domicilio>();
+		}
+	}
+	
+	public System.Data.Linq.Table<PedidoVenta> PedidoVenta
+	{
+		get
+		{
+			return this.GetTable<PedidoVenta>();
+		}
+	}
+	
+	public System.Data.Linq.Table<PedidoVentaDetalle> PedidoVentaDetalle
+	{
+		get
+		{
+			return this.GetTable<PedidoVentaDetalle>();
+		}
+	}
+	
+	public System.Data.Linq.Table<Usuario> Usuario
 	{
 		get
 		{
@@ -159,7 +170,7 @@ public partial class Articulo : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private int _id_rubro;
 	
-	private EntitySet<PedidoVentaDetalle> _PedidoVentaDetalles;
+	private EntitySet<PedidoVentaDetalle> _PedidoVentaDetalle;
 	
 	private EntityRef<Rubro> _Rubro;
 	
@@ -185,7 +196,7 @@ public partial class Articulo : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	public Articulo()
 	{
-		this._PedidoVentaDetalles = new EntitySet<PedidoVentaDetalle>(new Action<PedidoVentaDetalle>(this.attach_PedidoVentaDetalles), new Action<PedidoVentaDetalle>(this.detach_PedidoVentaDetalles));
+		this._PedidoVentaDetalle = new EntitySet<PedidoVentaDetalle>(new Action<PedidoVentaDetalle>(this.attach_PedidoVentaDetalle), new Action<PedidoVentaDetalle>(this.detach_PedidoVentaDetalle));
 		this._Rubro = default(EntityRef<Rubro>);
 		OnCreated();
 	}
@@ -334,16 +345,16 @@ public partial class Articulo : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Articulo_PedidoVentaDetalle", Storage="_PedidoVentaDetalles", ThisKey="id_articulo", OtherKey="id_articulo")]
-	public EntitySet<PedidoVentaDetalle> PedidoVentaDetalles
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Articulo_PedidoVentaDetalle", Storage="_PedidoVentaDetalle", ThisKey="id_articulo", OtherKey="id_articulo")]
+	public EntitySet<PedidoVentaDetalle> PedidoVentaDetalle
 	{
 		get
 		{
-			return this._PedidoVentaDetalles;
+			return this._PedidoVentaDetalle;
 		}
 		set
 		{
-			this._PedidoVentaDetalles.Assign(value);
+			this._PedidoVentaDetalle.Assign(value);
 		}
 	}
 	
@@ -364,12 +375,12 @@ public partial class Articulo : INotifyPropertyChanging, INotifyPropertyChanged
 				if ((previousValue != null))
 				{
 					this._Rubro.Entity = null;
-					previousValue.Articulos.Remove(this);
+					previousValue.Articulo.Remove(this);
 				}
 				this._Rubro.Entity = value;
 				if ((value != null))
 				{
-					value.Articulos.Add(this);
+					value.Articulo.Add(this);
 					this._id_rubro = value.id_rubro;
 				}
 				else
@@ -401,16 +412,251 @@ public partial class Articulo : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	private void attach_PedidoVentaDetalles(PedidoVentaDetalle entity)
+	private void attach_PedidoVentaDetalle(PedidoVentaDetalle entity)
 	{
 		this.SendPropertyChanging();
 		entity.Articulo = this;
 	}
 	
-	private void detach_PedidoVentaDetalles(PedidoVentaDetalle entity)
+	private void detach_PedidoVentaDetalle(PedidoVentaDetalle entity)
 	{
 		this.SendPropertyChanging();
 		entity.Articulo = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rubro")]
+public partial class Rubro : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _id_rubro;
+	
+	private string _codigo;
+	
+	private string _denominacion;
+	
+	private System.Nullable<int> _id_rubroPrimario;
+	
+	private EntitySet<Articulo> _Articulo;
+	
+	private EntityRef<Rubro> _Rubro2;
+	
+	private EntityRef<Rubro> _Rubro1;
+	
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_rubroChanging(int value);
+    partial void Onid_rubroChanged();
+    partial void OncodigoChanging(string value);
+    partial void OncodigoChanged();
+    partial void OndenominacionChanging(string value);
+    partial void OndenominacionChanged();
+    partial void Onid_rubroPrimarioChanging(System.Nullable<int> value);
+    partial void Onid_rubroPrimarioChanged();
+    #endregion
+	
+	public Rubro()
+	{
+		this._Articulo = new EntitySet<Articulo>(new Action<Articulo>(this.attach_Articulo), new Action<Articulo>(this.detach_Articulo));
+		this._Rubro2 = default(EntityRef<Rubro>);
+		this._Rubro1 = default(EntityRef<Rubro>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_rubro", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int id_rubro
+	{
+		get
+		{
+			return this._id_rubro;
+		}
+		set
+		{
+			if ((this._id_rubro != value))
+			{
+				if (this._Rubro1.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.Onid_rubroChanging(value);
+				this.SendPropertyChanging();
+				this._id_rubro = value;
+				this.SendPropertyChanged("id_rubro");
+				this.Onid_rubroChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_codigo", DbType="VarChar(5) NOT NULL", CanBeNull=false)]
+	public string codigo
+	{
+		get
+		{
+			return this._codigo;
+		}
+		set
+		{
+			if ((this._codigo != value))
+			{
+				this.OncodigoChanging(value);
+				this.SendPropertyChanging();
+				this._codigo = value;
+				this.SendPropertyChanged("codigo");
+				this.OncodigoChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_denominacion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string denominacion
+	{
+		get
+		{
+			return this._denominacion;
+		}
+		set
+		{
+			if ((this._denominacion != value))
+			{
+				this.OndenominacionChanging(value);
+				this.SendPropertyChanging();
+				this._denominacion = value;
+				this.SendPropertyChanged("denominacion");
+				this.OndenominacionChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_rubroPrimario", DbType="Int")]
+	public System.Nullable<int> id_rubroPrimario
+	{
+		get
+		{
+			return this._id_rubroPrimario;
+		}
+		set
+		{
+			if ((this._id_rubroPrimario != value))
+			{
+				this.Onid_rubroPrimarioChanging(value);
+				this.SendPropertyChanging();
+				this._id_rubroPrimario = value;
+				this.SendPropertyChanged("id_rubroPrimario");
+				this.Onid_rubroPrimarioChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Articulo", Storage="_Articulo", ThisKey="id_rubro", OtherKey="id_rubro")]
+	public EntitySet<Articulo> Articulo
+	{
+		get
+		{
+			return this._Articulo;
+		}
+		set
+		{
+			this._Articulo.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Rubro", Storage="_Rubro2", ThisKey="id_rubro", OtherKey="id_rubro", IsUnique=true, IsForeignKey=false)]
+	public Rubro Rubro2
+	{
+		get
+		{
+			return this._Rubro2.Entity;
+		}
+		set
+		{
+			Rubro previousValue = this._Rubro2.Entity;
+			if (((previousValue != value) 
+						|| (this._Rubro2.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Rubro2.Entity = null;
+					previousValue.Rubro1 = null;
+				}
+				this._Rubro2.Entity = value;
+				if ((value != null))
+				{
+					value.Rubro1 = this;
+				}
+				this.SendPropertyChanged("Rubro2");
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Rubro", Storage="_Rubro1", ThisKey="id_rubro", OtherKey="id_rubro", IsForeignKey=true)]
+	public Rubro Rubro1
+	{
+		get
+		{
+			return this._Rubro1.Entity;
+		}
+		set
+		{
+			Rubro previousValue = this._Rubro1.Entity;
+			if (((previousValue != value) 
+						|| (this._Rubro1.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Rubro1.Entity = null;
+					previousValue.Rubro2 = null;
+				}
+				this._Rubro1.Entity = value;
+				if ((value != null))
+				{
+					value.Rubro2 = this;
+					this._id_rubro = value.id_rubro;
+				}
+				else
+				{
+					this._id_rubro = default(int);
+				}
+				this.SendPropertyChanged("Rubro1");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_Articulo(Articulo entity)
+	{
+		this.SendPropertyChanging();
+		entity.Rubro = this;
+	}
+	
+	private void detach_Articulo(Articulo entity)
+	{
+		this.SendPropertyChanging();
+		entity.Rubro = null;
 	}
 }
 
@@ -428,15 +674,9 @@ public partial class Cliente : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private System.Nullable<decimal> _saldo;
 	
-	private int _id_domicilio;
+	private EntitySet<Domicilio> _Domicilio;
 	
-	private int _id_domicilioNegocio;
-	
-	private EntitySet<PedidoVenta> _PedidoVentas;
-	
-	private EntityRef<Domicilio> _Domicilio;
-	
-	private EntityRef<Domicilio> _Domicilio1;
+	private EntitySet<PedidoVenta> _PedidoVenta;
 	
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -450,17 +690,12 @@ public partial class Cliente : INotifyPropertyChanging, INotifyPropertyChanged
     partial void OncuitChanged();
     partial void OnsaldoChanging(System.Nullable<decimal> value);
     partial void OnsaldoChanged();
-    partial void Onid_domicilioChanging(int value);
-    partial void Onid_domicilioChanged();
-    partial void Onid_domicilioNegocioChanging(int value);
-    partial void Onid_domicilioNegocioChanged();
     #endregion
 	
 	public Cliente()
 	{
-		this._PedidoVentas = new EntitySet<PedidoVenta>(new Action<PedidoVenta>(this.attach_PedidoVentas), new Action<PedidoVenta>(this.detach_PedidoVentas));
-		this._Domicilio = default(EntityRef<Domicilio>);
-		this._Domicilio1 = default(EntityRef<Domicilio>);
+		this._Domicilio = new EntitySet<Domicilio>(new Action<Domicilio>(this.attach_Domicilio), new Action<Domicilio>(this.detach_Domicilio));
+		this._PedidoVenta = new EntitySet<PedidoVenta>(new Action<PedidoVenta>(this.attach_PedidoVenta), new Action<PedidoVenta>(this.detach_PedidoVenta));
 		OnCreated();
 	}
 	
@@ -544,132 +779,29 @@ public partial class Cliente : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_domicilio", DbType="Int NOT NULL")]
-	public int id_domicilio
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cliente_Domicilio", Storage="_Domicilio", ThisKey="id_cliente", OtherKey="id_cliente")]
+	public EntitySet<Domicilio> Domicilio
 	{
 		get
 		{
-			return this._id_domicilio;
+			return this._Domicilio;
 		}
 		set
 		{
-			if ((this._id_domicilio != value))
-			{
-				if (this._Domicilio.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.Onid_domicilioChanging(value);
-				this.SendPropertyChanging();
-				this._id_domicilio = value;
-				this.SendPropertyChanged("id_domicilio");
-				this.Onid_domicilioChanged();
-			}
+			this._Domicilio.Assign(value);
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_domicilioNegocio", DbType="Int NOT NULL")]
-	public int id_domicilioNegocio
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cliente_PedidoVenta", Storage="_PedidoVenta", ThisKey="id_cliente", OtherKey="id_cliente")]
+	public EntitySet<PedidoVenta> PedidoVenta
 	{
 		get
 		{
-			return this._id_domicilioNegocio;
+			return this._PedidoVenta;
 		}
 		set
 		{
-			if ((this._id_domicilioNegocio != value))
-			{
-				if (this._Domicilio1.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.Onid_domicilioNegocioChanging(value);
-				this.SendPropertyChanging();
-				this._id_domicilioNegocio = value;
-				this.SendPropertyChanged("id_domicilioNegocio");
-				this.Onid_domicilioNegocioChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cliente_PedidoVenta", Storage="_PedidoVentas", ThisKey="id_cliente", OtherKey="id_cliente")]
-	public EntitySet<PedidoVenta> PedidoVentas
-	{
-		get
-		{
-			return this._PedidoVentas;
-		}
-		set
-		{
-			this._PedidoVentas.Assign(value);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Domicilio_Cliente", Storage="_Domicilio", ThisKey="id_domicilio", OtherKey="id_domicilio", IsForeignKey=true)]
-	public Domicilio Domicilio
-	{
-		get
-		{
-			return this._Domicilio.Entity;
-		}
-		set
-		{
-			Domicilio previousValue = this._Domicilio.Entity;
-			if (((previousValue != value) 
-						|| (this._Domicilio.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._Domicilio.Entity = null;
-					previousValue.Clientes.Remove(this);
-				}
-				this._Domicilio.Entity = value;
-				if ((value != null))
-				{
-					value.Clientes.Add(this);
-					this._id_domicilio = value.id_domicilio;
-				}
-				else
-				{
-					this._id_domicilio = default(int);
-				}
-				this.SendPropertyChanged("Domicilio");
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Domicilio_Cliente1", Storage="_Domicilio1", ThisKey="id_domicilioNegocio", OtherKey="id_domicilio", IsForeignKey=true)]
-	public Domicilio Domicilio1
-	{
-		get
-		{
-			return this._Domicilio1.Entity;
-		}
-		set
-		{
-			Domicilio previousValue = this._Domicilio1.Entity;
-			if (((previousValue != value) 
-						|| (this._Domicilio1.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._Domicilio1.Entity = null;
-					previousValue.Clientes1.Remove(this);
-				}
-				this._Domicilio1.Entity = value;
-				if ((value != null))
-				{
-					value.Clientes1.Add(this);
-					this._id_domicilioNegocio = value.id_domicilio;
-				}
-				else
-				{
-					this._id_domicilioNegocio = default(int);
-				}
-				this.SendPropertyChanged("Domicilio1");
-			}
+			this._PedidoVenta.Assign(value);
 		}
 	}
 	
@@ -693,16 +825,210 @@ public partial class Cliente : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	private void attach_PedidoVentas(PedidoVenta entity)
+	private void attach_Domicilio(Domicilio entity)
 	{
 		this.SendPropertyChanging();
 		entity.Cliente = this;
 	}
 	
-	private void detach_PedidoVentas(PedidoVenta entity)
+	private void detach_Domicilio(Domicilio entity)
 	{
 		this.SendPropertyChanging();
 		entity.Cliente = null;
+	}
+	
+	private void attach_PedidoVenta(PedidoVenta entity)
+	{
+		this.SendPropertyChanging();
+		entity.Cliente = this;
+	}
+	
+	private void detach_PedidoVenta(PedidoVenta entity)
+	{
+		this.SendPropertyChanging();
+		entity.Cliente = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DeviceToken")]
+public partial class DeviceToken : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _uuid;
+	
+	private string _model;
+	
+	private string _serial;
+	
+	private string _token;
+	
+	private System.DateTime _fechaCreacion;
+	
+	private System.Nullable<System.DateTime> _fechaExpiracion;
+	
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnuuidChanging(int value);
+    partial void OnuuidChanged();
+    partial void OnmodelChanging(string value);
+    partial void OnmodelChanged();
+    partial void OnserialChanging(string value);
+    partial void OnserialChanged();
+    partial void OntokenChanging(string value);
+    partial void OntokenChanged();
+    partial void OnfechaCreacionChanging(System.DateTime value);
+    partial void OnfechaCreacionChanged();
+    partial void OnfechaExpiracionChanging(System.Nullable<System.DateTime> value);
+    partial void OnfechaExpiracionChanged();
+    #endregion
+	
+	public DeviceToken()
+	{
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_uuid", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int uuid
+	{
+		get
+		{
+			return this._uuid;
+		}
+		set
+		{
+			if ((this._uuid != value))
+			{
+				this.OnuuidChanging(value);
+				this.SendPropertyChanging();
+				this._uuid = value;
+				this.SendPropertyChanged("uuid");
+				this.OnuuidChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_model", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+	public string model
+	{
+		get
+		{
+			return this._model;
+		}
+		set
+		{
+			if ((this._model != value))
+			{
+				this.OnmodelChanging(value);
+				this.SendPropertyChanging();
+				this._model = value;
+				this.SendPropertyChanged("model");
+				this.OnmodelChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_serial", DbType="VarChar(32) NOT NULL", CanBeNull=false)]
+	public string serial
+	{
+		get
+		{
+			return this._serial;
+		}
+		set
+		{
+			if ((this._serial != value))
+			{
+				this.OnserialChanging(value);
+				this.SendPropertyChanging();
+				this._serial = value;
+				this.SendPropertyChanged("serial");
+				this.OnserialChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_token", DbType="VarChar(36) NOT NULL", CanBeNull=false)]
+	public string token
+	{
+		get
+		{
+			return this._token;
+		}
+		set
+		{
+			if ((this._token != value))
+			{
+				this.OntokenChanging(value);
+				this.SendPropertyChanging();
+				this._token = value;
+				this.SendPropertyChanged("token");
+				this.OntokenChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaCreacion", DbType="Date NOT NULL")]
+	public System.DateTime fechaCreacion
+	{
+		get
+		{
+			return this._fechaCreacion;
+		}
+		set
+		{
+			if ((this._fechaCreacion != value))
+			{
+				this.OnfechaCreacionChanging(value);
+				this.SendPropertyChanging();
+				this._fechaCreacion = value;
+				this.SendPropertyChanged("fechaCreacion");
+				this.OnfechaCreacionChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fechaExpiracion", DbType="Date")]
+	public System.Nullable<System.DateTime> fechaExpiracion
+	{
+		get
+		{
+			return this._fechaExpiracion;
+		}
+		set
+		{
+			if ((this._fechaExpiracion != value))
+			{
+				this.OnfechaExpiracionChanging(value);
+				this.SendPropertyChanging();
+				this._fechaExpiracion = value;
+				this.SendPropertyChanged("fechaExpiracion");
+				this.OnfechaExpiracionChanged();
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
 	}
 }
 
@@ -724,11 +1050,13 @@ public partial class Domicilio : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private string _longitud;
 	
-	private EntitySet<Cliente> _Clientes;
+	private string _tipo_domicilio;
 	
-	private EntitySet<Cliente> _Clientes1;
+	private int _id_cliente;
 	
-	private EntitySet<PedidoVenta> _PedidoVentas;
+	private EntitySet<PedidoVenta> _PedidoVenta;
+	
+	private EntityRef<Cliente> _Cliente;
 	
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -746,13 +1074,16 @@ public partial class Domicilio : INotifyPropertyChanging, INotifyPropertyChanged
     partial void OnlatitudChanged();
     partial void OnlongitudChanging(string value);
     partial void OnlongitudChanged();
+    partial void Ontipo_domicilioChanging(string value);
+    partial void Ontipo_domicilioChanged();
+    partial void Onid_clienteChanging(int value);
+    partial void Onid_clienteChanged();
     #endregion
 	
 	public Domicilio()
 	{
-		this._Clientes = new EntitySet<Cliente>(new Action<Cliente>(this.attach_Clientes), new Action<Cliente>(this.detach_Clientes));
-		this._Clientes1 = new EntitySet<Cliente>(new Action<Cliente>(this.attach_Clientes1), new Action<Cliente>(this.detach_Clientes1));
-		this._PedidoVentas = new EntitySet<PedidoVenta>(new Action<PedidoVenta>(this.attach_PedidoVentas), new Action<PedidoVenta>(this.detach_PedidoVentas));
+		this._PedidoVenta = new EntitySet<PedidoVenta>(new Action<PedidoVenta>(this.attach_PedidoVenta), new Action<PedidoVenta>(this.detach_PedidoVenta));
+		this._Cliente = default(EntityRef<Cliente>);
 		OnCreated();
 	}
 	
@@ -876,42 +1207,94 @@ public partial class Domicilio : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Domicilio_Cliente", Storage="_Clientes", ThisKey="id_domicilio", OtherKey="id_domicilio")]
-	public EntitySet<Cliente> Clientes
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tipo_domicilio", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+	public string tipo_domicilio
 	{
 		get
 		{
-			return this._Clientes;
+			return this._tipo_domicilio;
 		}
 		set
 		{
-			this._Clientes.Assign(value);
+			if ((this._tipo_domicilio != value))
+			{
+				this.Ontipo_domicilioChanging(value);
+				this.SendPropertyChanging();
+				this._tipo_domicilio = value;
+				this.SendPropertyChanged("tipo_domicilio");
+				this.Ontipo_domicilioChanged();
+			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Domicilio_Cliente1", Storage="_Clientes1", ThisKey="id_domicilio", OtherKey="id_domicilioNegocio")]
-	public EntitySet<Cliente> Clientes1
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_cliente", DbType="Int NOT NULL")]
+	public int id_cliente
 	{
 		get
 		{
-			return this._Clientes1;
+			return this._id_cliente;
 		}
 		set
 		{
-			this._Clientes1.Assign(value);
+			if ((this._id_cliente != value))
+			{
+				if (this._Cliente.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.Onid_clienteChanging(value);
+				this.SendPropertyChanging();
+				this._id_cliente = value;
+				this.SendPropertyChanged("id_cliente");
+				this.Onid_clienteChanged();
+			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Domicilio_PedidoVenta", Storage="_PedidoVentas", ThisKey="id_domicilio", OtherKey="id_domicilio")]
-	public EntitySet<PedidoVenta> PedidoVentas
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Domicilio_PedidoVenta", Storage="_PedidoVenta", ThisKey="id_domicilio", OtherKey="id_domicilio")]
+	public EntitySet<PedidoVenta> PedidoVenta
 	{
 		get
 		{
-			return this._PedidoVentas;
+			return this._PedidoVenta;
 		}
 		set
 		{
-			this._PedidoVentas.Assign(value);
+			this._PedidoVenta.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Cliente_Domicilio", Storage="_Cliente", ThisKey="id_cliente", OtherKey="id_cliente", IsForeignKey=true)]
+	public Cliente Cliente
+	{
+		get
+		{
+			return this._Cliente.Entity;
+		}
+		set
+		{
+			Cliente previousValue = this._Cliente.Entity;
+			if (((previousValue != value) 
+						|| (this._Cliente.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._Cliente.Entity = null;
+					previousValue.Domicilio.Remove(this);
+				}
+				this._Cliente.Entity = value;
+				if ((value != null))
+				{
+					value.Domicilio.Add(this);
+					this._id_cliente = value.id_cliente;
+				}
+				else
+				{
+					this._id_cliente = default(int);
+				}
+				this.SendPropertyChanged("Cliente");
+			}
 		}
 	}
 	
@@ -935,37 +1318,13 @@ public partial class Domicilio : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	private void attach_Clientes(Cliente entity)
+	private void attach_PedidoVenta(PedidoVenta entity)
 	{
 		this.SendPropertyChanging();
 		entity.Domicilio = this;
 	}
 	
-	private void detach_Clientes(Cliente entity)
-	{
-		this.SendPropertyChanging();
-		entity.Domicilio = null;
-	}
-	
-	private void attach_Clientes1(Cliente entity)
-	{
-		this.SendPropertyChanging();
-		entity.Domicilio1 = this;
-	}
-	
-	private void detach_Clientes1(Cliente entity)
-	{
-		this.SendPropertyChanging();
-		entity.Domicilio1 = null;
-	}
-	
-	private void attach_PedidoVentas(PedidoVenta entity)
-	{
-		this.SendPropertyChanging();
-		entity.Domicilio = this;
-	}
-	
-	private void detach_PedidoVentas(PedidoVenta entity)
+	private void detach_PedidoVenta(PedidoVenta entity)
 	{
 		this.SendPropertyChanging();
 		entity.Domicilio = null;
@@ -1000,7 +1359,7 @@ public partial class PedidoVenta : INotifyPropertyChanging, INotifyPropertyChang
 	
 	private int _id_domicilio;
 	
-	private EntitySet<PedidoVentaDetalle> _PedidoVentaDetalles;
+	private EntitySet<PedidoVentaDetalle> _PedidoVentaDetalle;
 	
 	private EntityRef<Cliente> _Cliente;
 	
@@ -1036,7 +1395,7 @@ public partial class PedidoVenta : INotifyPropertyChanging, INotifyPropertyChang
 	
 	public PedidoVenta()
 	{
-		this._PedidoVentaDetalles = new EntitySet<PedidoVentaDetalle>(new Action<PedidoVentaDetalle>(this.attach_PedidoVentaDetalles), new Action<PedidoVentaDetalle>(this.detach_PedidoVentaDetalles));
+		this._PedidoVentaDetalle = new EntitySet<PedidoVentaDetalle>(new Action<PedidoVentaDetalle>(this.attach_PedidoVentaDetalle), new Action<PedidoVentaDetalle>(this.detach_PedidoVentaDetalle));
 		this._Cliente = default(EntityRef<Cliente>);
 		this._Domicilio = default(EntityRef<Domicilio>);
 		OnCreated();
@@ -1270,16 +1629,16 @@ public partial class PedidoVenta : INotifyPropertyChanging, INotifyPropertyChang
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PedidoVenta_PedidoVentaDetalle", Storage="_PedidoVentaDetalles", ThisKey="id_pedidoVenta", OtherKey="id_pedidoVenta")]
-	public EntitySet<PedidoVentaDetalle> PedidoVentaDetalles
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PedidoVenta_PedidoVentaDetalle", Storage="_PedidoVentaDetalle", ThisKey="id_pedidoVenta", OtherKey="id_pedidoVenta")]
+	public EntitySet<PedidoVentaDetalle> PedidoVentaDetalle
 	{
 		get
 		{
-			return this._PedidoVentaDetalles;
+			return this._PedidoVentaDetalle;
 		}
 		set
 		{
-			this._PedidoVentaDetalles.Assign(value);
+			this._PedidoVentaDetalle.Assign(value);
 		}
 	}
 	
@@ -1300,12 +1659,12 @@ public partial class PedidoVenta : INotifyPropertyChanging, INotifyPropertyChang
 				if ((previousValue != null))
 				{
 					this._Cliente.Entity = null;
-					previousValue.PedidoVentas.Remove(this);
+					previousValue.PedidoVenta.Remove(this);
 				}
 				this._Cliente.Entity = value;
 				if ((value != null))
 				{
-					value.PedidoVentas.Add(this);
+					value.PedidoVenta.Add(this);
 					this._id_cliente = value.id_cliente;
 				}
 				else
@@ -1334,12 +1693,12 @@ public partial class PedidoVenta : INotifyPropertyChanging, INotifyPropertyChang
 				if ((previousValue != null))
 				{
 					this._Domicilio.Entity = null;
-					previousValue.PedidoVentas.Remove(this);
+					previousValue.PedidoVenta.Remove(this);
 				}
 				this._Domicilio.Entity = value;
 				if ((value != null))
 				{
-					value.PedidoVentas.Add(this);
+					value.PedidoVenta.Add(this);
 					this._id_domicilio = value.id_domicilio;
 				}
 				else
@@ -1371,13 +1730,13 @@ public partial class PedidoVenta : INotifyPropertyChanging, INotifyPropertyChang
 		}
 	}
 	
-	private void attach_PedidoVentaDetalles(PedidoVentaDetalle entity)
+	private void attach_PedidoVentaDetalle(PedidoVentaDetalle entity)
 	{
 		this.SendPropertyChanging();
 		entity.PedidoVenta = this;
 	}
 	
-	private void detach_PedidoVentaDetalles(PedidoVentaDetalle entity)
+	private void detach_PedidoVentaDetalle(PedidoVentaDetalle entity)
 	{
 		this.SendPropertyChanging();
 		entity.PedidoVenta = null;
@@ -1576,12 +1935,12 @@ public partial class PedidoVentaDetalle : INotifyPropertyChanging, INotifyProper
 				if ((previousValue != null))
 				{
 					this._Articulo.Entity = null;
-					previousValue.PedidoVentaDetalles.Remove(this);
+					previousValue.PedidoVentaDetalle.Remove(this);
 				}
 				this._Articulo.Entity = value;
 				if ((value != null))
 				{
-					value.PedidoVentaDetalles.Add(this);
+					value.PedidoVentaDetalle.Add(this);
 					this._id_articulo = value.id_articulo;
 				}
 				else
@@ -1610,12 +1969,12 @@ public partial class PedidoVentaDetalle : INotifyPropertyChanging, INotifyProper
 				if ((previousValue != null))
 				{
 					this._PedidoVenta.Entity = null;
-					previousValue.PedidoVentaDetalles.Remove(this);
+					previousValue.PedidoVentaDetalle.Remove(this);
 				}
 				this._PedidoVenta.Entity = value;
 				if ((value != null))
 				{
-					value.PedidoVentaDetalles.Add(this);
+					value.PedidoVentaDetalle.Add(this);
 					this._id_pedidoVenta = value.id_pedidoVenta;
 				}
 				else
@@ -1645,237 +2004,6 @@ public partial class PedidoVentaDetalle : INotifyPropertyChanging, INotifyProper
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Rubro")]
-public partial class Rubro : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _id_rubro;
-	
-	private string _codigo;
-	
-	private string _denominacion;
-	
-	private System.Nullable<int> _id_rubroPrimario;
-	
-	private EntitySet<Articulo> _Articulos;
-	
-	private EntitySet<Rubro> _Rubros;
-	
-	private EntityRef<Rubro> _Rubro1;
-	
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onid_rubroChanging(int value);
-    partial void Onid_rubroChanged();
-    partial void OncodigoChanging(string value);
-    partial void OncodigoChanged();
-    partial void OndenominacionChanging(string value);
-    partial void OndenominacionChanged();
-    partial void Onid_rubroPrimarioChanging(System.Nullable<int> value);
-    partial void Onid_rubroPrimarioChanged();
-    #endregion
-	
-	public Rubro()
-	{
-		this._Articulos = new EntitySet<Articulo>(new Action<Articulo>(this.attach_Articulos), new Action<Articulo>(this.detach_Articulos));
-		this._Rubros = new EntitySet<Rubro>(new Action<Rubro>(this.attach_Rubros), new Action<Rubro>(this.detach_Rubros));
-		this._Rubro1 = default(EntityRef<Rubro>);
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_rubro", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int id_rubro
-	{
-		get
-		{
-			return this._id_rubro;
-		}
-		set
-		{
-			if ((this._id_rubro != value))
-			{
-				this.Onid_rubroChanging(value);
-				this.SendPropertyChanging();
-				this._id_rubro = value;
-				this.SendPropertyChanged("id_rubro");
-				this.Onid_rubroChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_codigo", DbType="NChar(15) NOT NULL", CanBeNull=false)]
-	public string codigo
-	{
-		get
-		{
-			return this._codigo;
-		}
-		set
-		{
-			if ((this._codigo != value))
-			{
-				this.OncodigoChanging(value);
-				this.SendPropertyChanging();
-				this._codigo = value;
-				this.SendPropertyChanged("codigo");
-				this.OncodigoChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_denominacion", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-	public string denominacion
-	{
-		get
-		{
-			return this._denominacion;
-		}
-		set
-		{
-			if ((this._denominacion != value))
-			{
-				this.OndenominacionChanging(value);
-				this.SendPropertyChanging();
-				this._denominacion = value;
-				this.SendPropertyChanged("denominacion");
-				this.OndenominacionChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_rubroPrimario", DbType="Int")]
-	public System.Nullable<int> id_rubroPrimario
-	{
-		get
-		{
-			return this._id_rubroPrimario;
-		}
-		set
-		{
-			if ((this._id_rubroPrimario != value))
-			{
-				if (this._Rubro1.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.Onid_rubroPrimarioChanging(value);
-				this.SendPropertyChanging();
-				this._id_rubroPrimario = value;
-				this.SendPropertyChanged("id_rubroPrimario");
-				this.Onid_rubroPrimarioChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Articulo", Storage="_Articulos", ThisKey="id_rubro", OtherKey="id_rubro")]
-	public EntitySet<Articulo> Articulos
-	{
-		get
-		{
-			return this._Articulos;
-		}
-		set
-		{
-			this._Articulos.Assign(value);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Rubro", Storage="_Rubros", ThisKey="id_rubro", OtherKey="id_rubroPrimario")]
-	public EntitySet<Rubro> Rubros
-	{
-		get
-		{
-			return this._Rubros;
-		}
-		set
-		{
-			this._Rubros.Assign(value);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Rubro_Rubro", Storage="_Rubro1", ThisKey="id_rubroPrimario", OtherKey="id_rubro", IsForeignKey=true)]
-	public Rubro Rubro1
-	{
-		get
-		{
-			return this._Rubro1.Entity;
-		}
-		set
-		{
-			Rubro previousValue = this._Rubro1.Entity;
-			if (((previousValue != value) 
-						|| (this._Rubro1.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._Rubro1.Entity = null;
-					previousValue.Rubros.Remove(this);
-				}
-				this._Rubro1.Entity = value;
-				if ((value != null))
-				{
-					value.Rubros.Add(this);
-					this._id_rubroPrimario = value.id_rubro;
-				}
-				else
-				{
-					this._id_rubroPrimario = default(Nullable<int>);
-				}
-				this.SendPropertyChanged("Rubro1");
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
-	
-	private void attach_Articulos(Articulo entity)
-	{
-		this.SendPropertyChanging();
-		entity.Rubro = this;
-	}
-	
-	private void detach_Articulos(Articulo entity)
-	{
-		this.SendPropertyChanging();
-		entity.Rubro = null;
-	}
-	
-	private void attach_Rubros(Rubro entity)
-	{
-		this.SendPropertyChanging();
-		entity.Rubro1 = this;
-	}
-	
-	private void detach_Rubros(Rubro entity)
-	{
-		this.SendPropertyChanging();
-		entity.Rubro1 = null;
 	}
 }
 

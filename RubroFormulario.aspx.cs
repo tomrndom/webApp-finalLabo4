@@ -24,11 +24,6 @@ public partial class RubroFormulario : System.Web.UI.Page
             }
 
         } 
-
-        /*ListItem item = new ListItem("", "-1");
-        ddlRubroPri.Items.Insert(0, item);
-
-        PedidosDataContext db = new PedidosDataContext();      */          
     }
 
 
@@ -38,8 +33,8 @@ public partial class RubroFormulario : System.Web.UI.Page
         {
             using (var context = new PedidosDataContext())
             {
-                var temp = (from ru in context.Rubros
-                        where ru.id_rubro == Convert.ToInt32(Request.QueryString["id"])
+                var temp = (from ru in context.Rubro
+                            where ru.id_rubro == Convert.ToInt32(Request.QueryString["id"])
                         select ru).Single();
             txtCodigo.Text = temp.codigo;
             txtDenominacion.Text = temp.denominacion;
@@ -70,11 +65,11 @@ public partial class RubroFormulario : System.Web.UI.Page
                 List<Rubro> ListaRubro = new List<Rubro>();
                 if (idModificar == null)
                 {
-                    ListaRubro = (from iR in context.Rubros select iR).ToList();
+                    ListaRubro = (from iR in context.Rubro select iR).ToList();
                 }
                 else
                 {
-                    ListaRubro = (from iR in context.Rubros where iR.id_rubro.ToString() != idModificar select iR).ToList();
+                    ListaRubro = (from iR in context.Rubro where iR.id_rubro.ToString() != idModificar select iR).ToList();
                 }
               
                 Rubro ir = new Rubro();
@@ -102,24 +97,48 @@ public partial class RubroFormulario : System.Web.UI.Page
         PedidosDataContext db = new PedidosDataContext();
 
         if (Request.QueryString["id"] == null)
-        {            
-            Rubro ru = new Rubro();
-            ru.codigo = txtCodigo.Text;
-            ru.denominacion = txtDenominacion.Text;
-            db.Rubros.InsertOnSubmit(ru);
-            if (ddlRubroPri.SelectedValue == "-1")
+        {   try
             {
-                ru.id_rubroPrimario = null;
+                Rubro ru = new Rubro();
+                ru.codigo = txtCodigo.Text;
+                ru.denominacion = txtDenominacion.Text;
+                db.Rubro.InsertOnSubmit(ru);
+                if (ddlRubroPri.SelectedValue == "-1")
+                {
+                    ru.id_rubroPrimario = null;
+                }
+                else
+                {
+                    ru.id_rubroPrimario = Convert.ToInt32(ddlRubroPri.SelectedValue);
+                }
+                db.SubmitChanges();
             }
-            else
+            catch (Exception msjError)
             {
-                ru.id_rubroPrimario = Convert.ToInt32(ddlRubroPri.SelectedValue);
-            }            
-            db.SubmitChanges();
+                try
+                {
+                    var errorNumber = ((System.Data.SqlClient.SqlException)msjError).Number;
+                    if (errorNumber == 2601)
+                    {                        
+
+                    }
+                    else
+                    {
+                        // error desconocido
+                    }
+                }
+                catch (Exception ex)
+                {   
+                    // error desconocido
+                }
+
+
+            }
+            
         }
         else
         {
-            var temp = (from ru in db.Rubros
+            var temp = (from ru in db.Rubro
                         where ru.id_rubro == Convert.ToInt32(Request.QueryString["id"])
                         select ru).Single();
 

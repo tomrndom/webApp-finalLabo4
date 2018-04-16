@@ -37,6 +37,14 @@
                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:Laboratorio4ConnectionString %>" SelectCommand="SELECT * FROM [Cliente]"></asp:SqlDataSource>
                             <asp:RequiredFieldValidator ValidationGroup="pedido" ID="rfvCliente" runat="server" ControlToValidate="ddlCliente" ErrorMessage="* Este campo es obligatorio" Display="Dynamic" CssClass="font-bold col-red" />
                         </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <asp:Label>Domicilio</asp:Label>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <asp:DropDownList ID="ddlDomicilio" runat="server" DataSourceID="SqlDataSource1" DataTextField="calle" DataValueField="id_cliente" CssClass="input" AppendDataBoundItems="true"></asp:DropDownList>
+                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:Laboratorio4ConnectionString %>" SelectCommand="SELECT Cliente.id_cliente, Domicilio.id_domicilio AS Expr1, Domicilio.calle, Domicilio.numero, Domicilio.localidad, Domicilio.latitud, Domicilio.longitud, Domicilio.tipo_domicilio, Domicilio.id_cliente FROM Cliente INNER JOIN Domicilio ON Cliente.id_cliente = Domicilio.id_cliente"></asp:SqlDataSource>
+                            <asp:RequiredFieldValidator ValidationGroup="pedido" ID="rfvDomicilio" runat="server" ControlToValidate="ddlDomicilio" ErrorMessage="* Este campo es obligatorio" Display="Dynamic" CssClass="font-bold col-red" />
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">

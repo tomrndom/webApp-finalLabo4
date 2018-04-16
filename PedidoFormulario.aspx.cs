@@ -50,7 +50,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
             titulo.InnerHtml = "Editar Pedido";
 
             PedidosDataContext db = new PedidosDataContext();
-            var temp = (from cli in db.PedidoVentas
+            var temp = (from cli in db.PedidoVenta
                         where cli.id_pedidoVenta == Convert.ToInt32(Request.QueryString["id"])
                         select cli).Single();
 
@@ -72,7 +72,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
         {
             using (var context = new PedidosDataContext())
             {
-                var listaArticulos = (from lArt in context.Articulos select lArt).ToList();
+                var listaArticulos = (from lArt in context.Articulo select lArt).ToList();
                 ddlArticulos.DataSource = listaArticulos;
                 ddlArticulos.DataValueField = "id_articulo";
                 ddlArticulos.DataTextField = "denominacion";
@@ -123,7 +123,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
                     }
                     iPedidoInsertar.fechaEstimadaEntrega = DateTime.Now;
                     iPedidoInsertar.fechaPedido = DateTime.Now;
-                    iPedidoInsertar.PedidoVentaDetalles.AddRange(detallePedidoInsertar);
+                    iPedidoInsertar.PedidoVentaDetalle.AddRange(detallePedidoInsertar);
                     iPedidoInsertar.gastosEnvio = 0;
                     iPedidoInsertar.id_cliente = 2;
                     iPedidoInsertar.id_domicilio = 1;
@@ -131,7 +131,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
                     iPedidoInsertar.montoTotal = 10;
                     iPedidoInsertar.subTotal = 10;
                     iPedidoInsertar.estado = ddlEstado.SelectedValue;
-                    context.PedidoVentas.InsertOnSubmit(iPedidoInsertar);
+                    context.PedidoVenta.InsertOnSubmit(iPedidoInsertar);
                     context.SubmitChanges();
 
                     
@@ -169,7 +169,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
     {
         using (var context = new PedidosDataContext())
         {
-            txtPrecio.Text = (from iArt in context.Articulos where iArt.id_articulo == int.Parse(ddlArticulos.SelectedValue) select iArt.precioCompra).SingleOrDefault().ToString();
+            txtPrecio.Text = (from iArt in context.Articulo where iArt.id_articulo == int.Parse(ddlArticulos.SelectedValue) select iArt.precioCompra).SingleOrDefault().ToString();
         }
             
     }

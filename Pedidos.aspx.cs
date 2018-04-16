@@ -20,9 +20,9 @@ public partial class Pedidos : System.Web.UI.Page
     {
         try
         {
-            using (var context = new PedidosDataContext())
+            using (var db = new PedidosDataContext())
             {
-                var listaPedidos = (from lPedidos in context.PedidoVentas select lPedidos).ToList();
+                var listaPedidos = (from lPedidos in db.PedidoVenta select lPedidos).ToList();
                 gridPedidos.DataSource = listaPedidos.AsEnumerable();
                 gridPedidos.DataBind();
             }
@@ -49,11 +49,11 @@ public partial class Pedidos : System.Web.UI.Page
         PedidosDataContext db = new PedidosDataContext();
         int idSeleccionado = Convert.ToInt32(e.CommandArgument.ToString());
 
-        var temp = (from pac in db.PedidoVentas
+        var temp = (from pac in db.PedidoVenta
                     where pac.id_pedidoVenta == idSeleccionado
                     select pac).Single();
 
-        db.PedidoVentas.DeleteOnSubmit(temp);
+        db.PedidoVenta.DeleteOnSubmit(temp);
         db.SubmitChanges();
         gridPedidos.DataBind();
     }

@@ -292,5 +292,6 @@ plugins/
 scss/
 js/*
 !js/script.js
+!js/admin.js
 images/
 css/

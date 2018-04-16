@@ -24,20 +24,33 @@ public partial class Clientes : System.Web.UI.Page
 
     protected void btnBorrar_Command(object sender, CommandEventArgs e)
     {
-        PedidosDataContext db = new PedidosDataContext();
-        int idSeleccionado = Convert.ToInt32(e.CommandArgument.ToString());
+        try
+        {
+            PedidosDataContext db = new PedidosDataContext();
+            int idSeleccionado = Convert.ToInt32(e.CommandArgument.ToString());
 
-        var temp = (from pac in db.Clientes
-                    where pac.id_cliente == idSeleccionado
-                    select pac).Single();
+            var temp = (from pac in db.Cliente
+                        where pac.id_cliente == idSeleccionado
+                        select pac).Single();
 
-        db.Clientes.DeleteOnSubmit(temp);
-        db.SubmitChanges();
-        gridClientes.DataBind();
+            db.Cliente.DeleteOnSubmit(temp);
+            db.SubmitChanges();
+            gridClientes.DataBind();
+        }
+        catch (Exception ex)
+        {
+
+        }
+        
     }
 
     protected void btnVerPedidos_Command(object sender, CommandEventArgs e)
     {
         Response.Redirect("Pedidos.aspx?id=" + e.CommandArgument);
+    }
+
+    protected void btnDomicilios_Command(object sender, CommandEventArgs e)
+    {
+        Response.Redirect("Domicilios.aspx?id=" + e.CommandArgument);
     }
 }

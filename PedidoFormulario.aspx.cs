@@ -160,7 +160,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
                         detallePedidoInsertar.Add(iDetalle);
                     }
                     iPedidoInsertar.fechaEstimadaEntrega = DateTime.Now;                
-                    iPedidoInsertar.fechaPedido = Convert.ToDateTime(txtPedidoFecha.Text);
+                    iPedidoInsertar.fechaPedido = DateTime.Now;
                     iPedidoInsertar.PedidoVentaDetalle.AddRange(detallePedidoInsertar);
                     iPedidoInsertar.gastosEnvio = 0;
                     iPedidoInsertar.id_cliente = Convert.ToInt32(ddlCliente.SelectedValue);

@@ -159,9 +159,8 @@ public partial class PedidoFormulario : System.Web.UI.Page
                         iDetalle.porcentajeDescuento = element.porcentajeDescuento;
                         detallePedidoInsertar.Add(iDetalle);
                     }
-                    iPedidoInsertar.fechaEstimadaEntrega = Convert.ToDateTime(txtFechaEstimada.Text);
-                    DateTime hoy = DateTime.Now;
-                    iPedidoInsertar.fechaPedido = hoy;
+                    iPedidoInsertar.fechaEstimadaEntrega = Convert.ToDateTime(txtFechaEstimada.Text);                
+                    iPedidoInsertar.fechaPedido = Convert.ToDateTime(txtPedidoFecha.Text);
                     iPedidoInsertar.PedidoVentaDetalle.AddRange(detallePedidoInsertar);
                     iPedidoInsertar.gastosEnvio = 0;
                     iPedidoInsertar.id_cliente = Convert.ToInt32(ddlCliente.SelectedValue);

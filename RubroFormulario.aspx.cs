@@ -10,7 +10,8 @@ public partial class RubroFormulario : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        if (!Page.IsPostBack) {
+        if (!Page.IsPostBack)
+        {
             cargarRubros(Request.QueryString["id"]);
             if (Request.QueryString["id"] == null)
             {
@@ -23,9 +24,8 @@ public partial class RubroFormulario : System.Web.UI.Page
                 PrecargarDatos(Int32.Parse(Request.QueryString["id"]));
             }
 
-        } 
+        }
     }
-
 
     private void PrecargarDatos(int id)
     {
@@ -33,13 +33,11 @@ public partial class RubroFormulario : System.Web.UI.Page
         {
             using (var context = new PedidosDataContext())
             {
-                var temp = (from ru in context.Rubro
-                            where ru.id_rubro == Convert.ToInt32(Request.QueryString["id"])
-                        select ru).Single();
-            txtCodigo.Text = temp.codigo;
-            txtDenominacion.Text = temp.denominacion;
-            
-            if (temp.id_rubroPrimario == null)
+                var temp = (from ru in context.Rubro where ru.id_rubro == Convert.ToInt32(Request.QueryString["id"]) select ru).Single();
+                txtCodigo.Text = temp.codigo;
+                txtDenominacion.Text = temp.denominacion;
+
+                if (temp.id_rubroPrimario == null)
                 {
                     ddlRubroPri.SelectedValue = "-1";
                 }
@@ -47,7 +45,7 @@ public partial class RubroFormulario : System.Web.UI.Page
                 {
                     ddlRubroPri.SelectedValue = Convert.ToString(temp.id_rubroPrimario);
                 }
-           
+
             }
         }
         catch (Exception)
@@ -71,7 +69,7 @@ public partial class RubroFormulario : System.Web.UI.Page
                 {
                     ListaRubro = (from iR in context.Rubro where iR.id_rubro.ToString() != idModificar select iR).ToList();
                 }
-              
+
                 Rubro ir = new Rubro();
                 ir.id_rubro = -1;
                 ir.denominacion = "SIN RUBRO";
@@ -81,7 +79,6 @@ public partial class RubroFormulario : System.Web.UI.Page
                 ddlRubroPri.DataTextField = "denominacion";
                 ddlRubroPri.SelectedValue = "-1";
                 ddlRubroPri.DataBind();
-
 
             }
         }
@@ -97,7 +94,8 @@ public partial class RubroFormulario : System.Web.UI.Page
         PedidosDataContext db = new PedidosDataContext();
 
         if (Request.QueryString["id"] == null)
-        {   try
+        {
+            try
             {
                 Rubro ru = new Rubro();
                 ru.codigo = txtCodigo.Text;
@@ -112,6 +110,8 @@ public partial class RubroFormulario : System.Web.UI.Page
                     ru.id_rubroPrimario = Convert.ToInt32(ddlRubroPri.SelectedValue);
                 }
                 db.SubmitChanges();
+
+                Response.Redirect("Rubros.aspx");
             }
             catch (Exception msjError)
             {
@@ -119,45 +119,77 @@ public partial class RubroFormulario : System.Web.UI.Page
                 {
                     var errorNumber = ((System.Data.SqlClient.SqlException)msjError).Number;
                     if (errorNumber == 2601)
-                    {                        
-
+                    {
+                        lblError.Visible = true;
+                        lblError.Text = "El código de rubro ya está en uso.";
                     }
                     else
                     {
                         // error desconocido
+                        lblError.Visible = true;
+                        lblError.Text = "Ocurrió un error al guardar el rubro.";
                     }
                 }
                 catch (Exception ex)
-                {   
+                {
                     // error desconocido
+                    lblError.Visible = true;
+                    lblError.Text = "Ocurrió un error al guardar el rubro.";
                 }
 
-
             }
-            
+
         }
         else
         {
-            var temp = (from ru in db.Rubro
-                        where ru.id_rubro == Convert.ToInt32(Request.QueryString["id"])
-                        select ru).Single();
 
-            temp.codigo = txtCodigo.Text;
-            temp.denominacion = txtDenominacion.Text;
-            if (ddlRubroPri.SelectedValue == "-1")
+            try
             {
-                temp.id_rubroPrimario = null;
+                var temp = (from ru in db.Rubro where ru.id_rubro == Convert.ToInt32(Request.QueryString["id"]) select ru).Single();
+
+                temp.codigo = txtCodigo.Text;
+                temp.denominacion = txtDenominacion.Text;
+                if (ddlRubroPri.SelectedValue == "-1")
+                {
+                    temp.id_rubroPrimario = null;
+                }
+                else
+                {
+                    temp.id_rubroPrimario = Int32.Parse(ddlRubroPri.SelectedValue);
+                }
+
+                db.SubmitChanges();
+
+                Response.Redirect("Rubros.aspx");
             }
-            else {                
-                temp.id_rubroPrimario = Int32.Parse(ddlRubroPri.SelectedValue);
+            catch (Exception msjError)
+            {
+                try
+                {
+                    var errorNumber = ((System.Data.SqlClient.SqlException)msjError).Number;
+                    if (errorNumber == 2601)
+                    {
+                        lblError.Visible = true;
+                        lblError.Text = "El código de rubro ya está en uso.";
+                    }
+                    else
+                    {
+                        // error desconocido
+                        lblError.Visible = true;
+                        lblError.Text = "Ocurrió un error al guardar el rubro.";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // error desconocido
+                    lblError.Visible = true;
+                    lblError.Text = "Ocurrió un error al guardar el rubro.";
+                }
+
             }
-            
-            
-            db.SubmitChanges();
 
         }
 
-        Response.Redirect("Rubros.aspx");
     }
 
     protected void btnCancelar_Click(object sender, EventArgs e)

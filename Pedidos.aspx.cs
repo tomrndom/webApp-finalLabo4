@@ -22,9 +22,30 @@ public partial class Pedidos : System.Web.UI.Page
         {
             using (var db = new PedidosDataContext())
             {
-                var listaPedidos = (from lPedidos in db.PedidoVenta select lPedidos).ToList();
-                gridPedidos.DataSource = listaPedidos.AsEnumerable();
-                gridPedidos.DataBind();
+                if (Request.QueryString["id"] != null)
+                {
+                    btnVolver.Visible = true;
+
+                    var listaPedidos = (from lPedidos in db.PedidoVenta
+                                        where lPedidos.id_cliente == Convert.ToInt32(Request.QueryString["id"])
+                                        select lPedidos).ToList();
+                    if (listaPedidos.Count > 0)
+                    {
+                        gridPedidos.DataSource = listaPedidos.AsEnumerable();
+                        gridPedidos.DataBind();
+                    }
+                    else
+                    {
+                        lblNoPedidos.Visible = true;
+                    }
+                }
+                else {
+                    var listaPedidos = (from lPedidos in db.PedidoVenta                                        
+                                        select lPedidos).ToList();
+                    gridPedidos.DataSource = listaPedidos.AsEnumerable();
+                    gridPedidos.DataBind();
+                }
+                
             }
         }
         catch (Exception ex)
@@ -61,5 +82,10 @@ public partial class Pedidos : System.Web.UI.Page
     protected void btnVerPedidos_Command(object sender, CommandEventArgs e)
     {
         Response.Redirect("DetallePedido.aspx?id=" + e.CommandArgument);
+    }
+
+    protected void btnVolver_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Clientes.aspx");
     }
 }

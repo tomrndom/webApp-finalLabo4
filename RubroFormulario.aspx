@@ -48,6 +48,10 @@
 
                     <asp:Button ID="btnCancelar" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" CausesValidation="false" CssClass="btn bg-blue actions waves-effect" />
 
+                    <br />
+                    <br />
+                    <asp:label ID="lblError" runat="server" Visible="false" CssClass="font-bold col-red"></asp:label>                      
+                    <br />
                 </div>
             </div>
         </div>

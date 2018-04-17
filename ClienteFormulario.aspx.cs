@@ -8,8 +8,8 @@ using System.Web.UI.WebControls;
 public partial class ClienteFormulario : System.Web.UI.Page
 {
 
-    string lat;
-    string lng;    
+    string lat = null;
+    string lng = null;    
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -106,5 +106,17 @@ public partial class ClienteFormulario : System.Web.UI.Page
     protected void btnCancelar_Click(object sender, EventArgs e)
     {
         Response.Redirect("Clientes.aspx");
+    }
+
+    protected void validaGeo_ServerValidate(object source, ServerValidateEventArgs args)
+    {
+        if (lat != null && lng != null)
+        {
+            args.IsValid = true;
+        }
+        else
+        {
+            args.IsValid = false;
+        }
     }
 }

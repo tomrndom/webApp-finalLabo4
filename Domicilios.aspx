@@ -13,12 +13,12 @@
                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 pull-left">
                         Lista de Domicilios
                             </div>
-                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        <asp:LinkButton ID="btnVolver" runat="server" CausesValidation="false" OnClick="btnVolver_Click" CssClass="btn bg-blue actions waves-effect pull-right" Text="Volver"/>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">                        
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                         <asp:LinkButton ID="btnNuevoDomicilio" runat="server" OnClick="btnNuevoDomicilio_Click" CssClass="btn bg-blue actions waves-effect pull-right" Text="Nuevo Domicilio &nbsp;<i class='material-icons'>add_box</i>"/>
                         </div>
+                        <br />
                     </h2>
                     <br />
                 </div>
@@ -42,7 +42,10 @@
                                 </ItemTemplate>
                             </asp:TemplateField>                           
                         </Columns>
-                    </asp:GridView>   
+                    </asp:GridView> 
+                    <br />  
+                    <asp:LinkButton ID="btnVolver" runat="server" CausesValidation="false" OnClick="btnVolver_Click" CssClass="btn bg-blue actions waves-effect pull-left" Text="Volver"/>                    
+                    <br />
                 </div>                
             </div>
         </div>

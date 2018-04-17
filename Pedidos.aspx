@@ -38,7 +38,13 @@
                             </ItemTemplate>
                             </asp:TemplateField>                            
                         </Columns>
-                    </asp:GridView>   
+                    </asp:GridView>                     
+                    <asp:label ID="lblNoPedidos" runat="server" text="Este cliente no tiene ningún pedido realizado en su historial" Visible="false"></asp:label>                      
+                    <br /><br />
+                    <asp:LinkButton ID="btnVolver" runat="server" CausesValidation="false" OnClick="btnVolver_Click" Visible="false" CssClass="btn bg-blue actions waves-effect pull-left" Text="Volver"/>
+
+                    
+                    <br />
                 </div>
             </div>
         </div>

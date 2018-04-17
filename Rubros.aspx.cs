@@ -38,7 +38,27 @@ public partial class Rubros : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
+            try
+            {
+                var errorNumber = ((System.Data.SqlClient.SqlException)ex).Number;
+                if (errorNumber == 547)
+                {
+                    lblError.Visible = true;
+                    lblError.Text = "No puede eliminarse un rubro que posea articulos o rubros asociados.";
+                }
+                else
+                {
+                    // error desconocido
+                    lblError.Visible = true;
+                    lblError.Text = "Ocurrió un error al eliminar el rubro.";
+                }
+            }
+            catch (Exception ex2)
+            {
+                // error desconocido
+                lblError.Visible = true;
+                lblError.Text = "Ocurrió un error al eliminar el rubro.";
+            }          
         }
 
 

@@ -23,15 +23,44 @@ public partial class Articulos : System.Web.UI.Page
     }
     protected void btnBorrar_Command(object sender, CommandEventArgs e)
     {
-        PedidosDataContext db = new PedidosDataContext();
-        int idSeleccionado = Convert.ToInt32(e.CommandArgument.ToString());
+        try
+        {
 
-        var temp = (from art in db.Articulo
-                    where art.id_articulo== idSeleccionado
-                    select art).Single();
+            PedidosDataContext db = new PedidosDataContext();
+            int idSeleccionado = Convert.ToInt32(e.CommandArgument.ToString());
 
-        db.Articulo.DeleteOnSubmit(temp);
-        db.SubmitChanges();
-        gridArticulos.DataBind();
+            var temp = (from art in db.Articulo
+                        where art.id_articulo == idSeleccionado
+                        select art).Single();
+
+            db.Articulo.DeleteOnSubmit(temp);
+            db.SubmitChanges();
+            gridArticulos.DataBind();
+        } 
+        catch (Exception ex)
+        {            
+            try
+            {
+                var errorNumber = ((System.Data.SqlClient.SqlException)ex).Number;
+                if (errorNumber == 547)
+                {
+                    lblError.Visible = true;
+                    lblError.Text = "No puede eliminarse un artículo que posea pedidos asociados.";
+                }
+                else
+                {
+                    // error desconocido
+                    lblError.Visible = true;
+                    lblError.Text = "Ocurrió un error al eliminar el artículo.";
+                }
+            }
+            catch (Exception ex2)
+            {
+                // error desconocido
+                lblError.Visible = true;
+                lblError.Text = "Ocurrió un error al eliminar el artículo.";
+            }
+        }
     }
+    
 }

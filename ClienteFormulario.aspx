@@ -29,6 +29,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <asp:TextBox ID="txtCUIT" runat="server" CssClass="input" style="width: 100%;" />    
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtCUIT" ErrorMessage="* Este campo es obligatorio" Display="Dynamic" CssClass="font-bold col-red" />
+                            <asp:RegularExpressionValidator ID="RegularFieldValidatorCUIT" runat="server" ControlToValidate="txtCUIT" ValidationExpression="^[0-9]{2}-[0-9]{8}-[0-9]$" ErrorMessage="* El CUIT ingresado no es válido" Display="Dynamic" CssClass="font-bold col-red"></asp:RegularExpressionValidator>
                         </div>
                     </div>                                        
                     <asp:Label><h3>Domicilio</h3></asp:Label>                    
@@ -61,7 +62,8 @@
                     <asp:Label CssClass="m-l-20 font-bold" runat="server">Si la dirección no coincide con la ubicación, puede modificarlo manualmente.</asp:Label>
 
                     <asp:HiddenField ID="hiddenLat" ClientIDMode="Static" runat="server" />
-                    <asp:HiddenField ID="hiddenLng" ClientIDMode="Static" runat="server" />
+                    <asp:HiddenField ID="hiddenLng" ClientIDMode="Static" runat="server" />                    
+                    <asp:CustomValidator ID="validaGeo" runat="server" ErrorMessage="* Debe ubicar su domicilio en el mapa." Display="Dynamic" CssClass="font-bold col-red" OnServerValidate="validaGeo_ServerValidate"></asp:CustomValidator>
 
                     <br /><br />
 

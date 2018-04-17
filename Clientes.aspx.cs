@@ -29,6 +29,15 @@ public partial class Clientes : System.Web.UI.Page
             PedidosDataContext db = new PedidosDataContext();
             int idSeleccionado = Convert.ToInt32(e.CommandArgument.ToString());
 
+            var tempDom = (from dom in db.Domicilio
+                           where dom.id_cliente == idSeleccionado
+                           select dom).ToArray();
+
+            for (int i = 0; i < tempDom.Count(); i++)
+            {
+                db.Domicilio.DeleteOnSubmit(tempDom[i]);
+            }
+
             var temp = (from pac in db.Cliente
                         where pac.id_cliente == idSeleccionado
                         select pac).Single();
@@ -39,7 +48,27 @@ public partial class Clientes : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-
+            try
+            {
+                var errorNumber = ((System.Data.SqlClient.SqlException)ex).Number;
+                if (errorNumber == 547)
+                {
+                    lblError.Visible = true;
+                    lblError.Text = "No puede eliminarse un cliente que posea pedidos asociados.";
+                }
+                else
+                {
+                    // error desconocido
+                    lblError.Visible = true;
+                    lblError.Text = "Ocurrió un error al eliminar el cliente.";
+                }
+            }
+            catch (Exception ex2)
+            {
+                // error desconocido
+                lblError.Visible = true;
+                lblError.Text = "Ocurrió un error al eliminar el cliente.";
+            }
         }
         
     }

@@ -46,7 +46,11 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
-                    </asp:GridView>                    
+                    </asp:GridView>    
+                    <br />
+                    <br />
+                    <asp:label ID="lblError" runat="server" Visible="false" CssClass="font-bold col-red"></asp:label>                      
+                    <br />
                 </div>
             </div>
         </div>

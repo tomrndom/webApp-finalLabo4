@@ -133,7 +133,8 @@ public partial class PedidoFormulario : System.Web.UI.Page
         txtGastosEnvio.Text = "50,00";
         txtSubTotal.Text = subTotal.ToString();
         decimal gastoEnvio = Convert.ToDecimal(txtGastosEnvio.Text);
-        txtTotal.Text = (subTotal + gastoEnvio).ToString();
+        decimal tempTotal = subTotal + gastoEnvio
+        txtTotal.Text = tempTotal.ToString();
     }
 
     protected void btnGuardar_Click(object sender, EventArgs e)

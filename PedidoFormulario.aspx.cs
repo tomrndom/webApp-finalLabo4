@@ -130,7 +130,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
         {            
             subTotal += element.subTotal;
         }
-        txtGastosEnvio.Text = "50,00";
+        txtGastosEnvio.Text = "50.00";
         txtSubTotal.Text = subTotal.ToString();
         decimal gastoEnvio = Convert.ToDecimal(txtGastosEnvio.Text);
         decimal tempTotal = subTotal + gastoEnvio
@@ -147,8 +147,6 @@ public partial class PedidoFormulario : System.Web.UI.Page
                 iCliente = (from ic in context.Cliente where ic.id_cliente == Convert.ToInt32(ddlCliente.SelectedValue) select ic).Single();
                 iCliente.saldo = iCliente.saldo - Convert.ToDecimal(txtTotal.Text);
                 
-
-
                     PedidoVenta iPedidoInsertar = new PedidoVenta();
 
                     List<PedidoVentaDetalle> detallePedidoInsertar = new List<PedidoVentaDetalle>();

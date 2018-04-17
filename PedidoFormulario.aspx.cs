@@ -28,14 +28,35 @@ public partial class PedidoFormulario : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            cargarArticulos();
-            detallePedido = new List<DTOPedidoVentaDetalle>();
-            txtPedidoFecha.Text = DateTime.Now.Date.ToString();
+            try
+            {
+                using (var context = new PedidosDataContext())
+                {
+                    Cliente cliSel = new Cliente();
+                    cliSel.razonSocial = "Seleccione un cliente";
+                    cliSel.id_cliente = -1;
+                    var listaClientes = (from lCli in context.Cliente select lCli).ToList();
+                    listaClientes.Add(cliSel);
+
+                    ddlCliente.DataSource = listaClientes;
+                    ddlCliente.DataValueField = "id_cliente";
+                    ddlCliente.DataTextField = "razonSocial";
+                    ddlCliente.DataBind();
+                    ddlCliente.SelectedValue = "-1";
+                }
+                    
+                cargarArticulos();
+                detallePedido = new List<DTOPedidoVentaDetalle>();            
+            }
+            catch (Exception ex)
+            {
+            }
         }
        
             
-            // Solo lectura
+        // Solo lectura
         txtSubTotal.ReadOnly = true;
+        txtPedidoFecha.ReadOnly = true;
         txtSubTotal.BackColor = System.Drawing.SystemColors.Window;
         txtGastosEnvio.ReadOnly = true;
         txtGastosEnvio.BackColor = System.Drawing.SystemColors.Window;
@@ -45,6 +66,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
         if (Request.QueryString["id"] == null)
         {
             titulo.InnerHtml = "Nuevo Pedido";
+            txtPedidoFecha.Text = DateTime.Now.Date.ToString("dd/MM/yyyy");
         }
         else
         {
@@ -57,12 +79,16 @@ public partial class PedidoFormulario : System.Web.UI.Page
 
             if (!IsPostBack)
             {
-                txtPedidoFecha.Text = temp.fechaPedido.ToString();
+                txtPedidoFecha.Text = temp.fechaPedido.ToString("dd/MM/yyyy");
+                txtFechaEstimada.Text = temp.fechaEstimadaEntrega.ToString();
+                ddlCliente.SelectedValue = temp.id_cliente.ToString();
+                //buscarDomicilio();
+                ddlDomicilio.SelectedValue = temp.id_domicilio.ToString();
+                ddlEstado.SelectedValue = temp.estado.ToString();
 
                 // Solo lectura
                 txtPedidoFecha.ReadOnly = true;
-                txtPedidoFecha.BackColor = System.Drawing.SystemColors.Window;
-
+                txtPedidoFecha.BackColor = System.Drawing.SystemColors.Window;            
             }
         }
     }
@@ -101,12 +127,13 @@ public partial class PedidoFormulario : System.Web.UI.Page
         decimal subTotal = 0;
         decimal total = 0;
         foreach (DTOPedidoVentaDetalle element in detallePedido)
-        {
+        {            
             subTotal += element.subTotal;
         }
+        txtGastosEnvio.Text = "50.00";
         txtSubTotal.Text = subTotal.ToString();
-        txtTotal.Text = subTotal.ToString();
-        txtGastosEnvio.Text = "0";
+        decimal gastoEnvio = Convert.ToDecimal(txtGastosEnvio.Text);
+        txtTotal.Text = (subTotal + gastoEnvio).ToString();
     }
 
     protected void btnGuardar_Click(object sender, EventArgs e)
@@ -129,14 +156,14 @@ public partial class PedidoFormulario : System.Web.UI.Page
                         detallePedidoInsertar.Add(iDetalle);
                     }
                     iPedidoInsertar.fechaEstimadaEntrega = DateTime.Now;
-                    iPedidoInsertar.fechaPedido = DateTime.Now;
+                    iPedidoInsertar.fechaPedido = Convert.ToDateTime(txtPedidoFecha.Text);
                     iPedidoInsertar.PedidoVentaDetalle.AddRange(detallePedidoInsertar);
                     iPedidoInsertar.gastosEnvio = 0;
-                    iPedidoInsertar.id_cliente = 2;
-                    iPedidoInsertar.id_domicilio = 1;
+                    iPedidoInsertar.id_cliente = Convert.ToInt32(ddlCliente.SelectedValue);
+                    iPedidoInsertar.id_domicilio = Convert.ToInt32(ddlDomicilio.SelectedValue);
                     iPedidoInsertar.nroPedido = 1;
-                    iPedidoInsertar.montoTotal = 10;
-                    iPedidoInsertar.subTotal = 10;
+                    iPedidoInsertar.montoTotal = Convert.ToDecimal(txtTotal.Text);
+                    iPedidoInsertar.subTotal = Convert.ToDecimal(txtSubTotal.Text);
                     iPedidoInsertar.estado = ddlEstado.SelectedValue;
                     context.PedidoVenta.InsertOnSubmit(iPedidoInsertar);
                     context.SubmitChanges();
@@ -163,12 +190,12 @@ public partial class PedidoFormulario : System.Web.UI.Page
         DTOPedidoVentaDetalle iPed = new DTOPedidoVentaDetalle();
         iPed.id_articulo = int.Parse(ddlArticulos.SelectedValue);
         iPed.porcentajeDescuento = 0;
-        iPed.subTotal = 1;
-        iPed.denominacion = ddlArticulos.SelectedItem.Text;
         iPed.cantidad = int.Parse(txtCantidad.Text);
-        detallePedido.Add(iPed);
+        iPed.subTotal = iPed.cantidad * Convert.ToDecimal(txtPrecio.Text);
+        iPed.denominacion = ddlArticulos.SelectedItem.Text;
+        detallePedido.Add(iPed);        
         gridDetallePedidoVenta.DataSource = detallePedido;
-       gridDetallePedidoVenta.DataBind();
+        gridDetallePedidoVenta.DataBind();
         actualizarTotales();
     }
 

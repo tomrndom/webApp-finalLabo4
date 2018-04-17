@@ -34,14 +34,9 @@
                             </asp:TemplateField>
                             <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:LinkButton ID="btnEditar" Text="<i class='material-icons'>create</i>" runat="server" OnCommand="btnEditar_Command" CommandArgument='<%# Eval("id_cliente") %>'></asp:LinkButton>                                
+                                <asp:LinkButton ID="btnEditar" Text="<i class='material-icons'>create</i>" runat="server" OnCommand="btnEditar_Command" CommandArgument='<%# Eval("id_pedidoVenta") %>'></asp:LinkButton>                                
                             </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:Button ID="btnVerPedidos" runat="server" CssClass="btn bg-blue actions waves-effect align-center" Text="Ver Pedidos" OnCommand="btnVerPedidos_Command" CommandArgument='<%# Eval("id_cliente") %>' />
-                                </ItemTemplate>
-                            </asp:TemplateField>                           
+                            </asp:TemplateField>                            
                         </Columns>
                     </asp:GridView>   
                 </div>

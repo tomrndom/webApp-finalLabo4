@@ -130,7 +130,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
         {            
             subTotal += element.subTotal;
         }
-        txtGastosEnvio.Text = "50,00";
+        txtGastosEnvio.Text = "50";
         txtSubTotal.Text = subTotal.ToString();
         decimal gastoEnvio = Convert.ToDecimal(txtGastosEnvio.Text);
         decimal tempTotal = subTotal + gastoEnvio;
@@ -159,7 +159,7 @@ public partial class PedidoFormulario : System.Web.UI.Page
                         iDetalle.porcentajeDescuento = element.porcentajeDescuento;
                         detallePedidoInsertar.Add(iDetalle);
                     }
-                    iPedidoInsertar.fechaEstimadaEntrega = Convert.ToDateTime(txtFechaEstimada.Text);                
+                    iPedidoInsertar.fechaEstimadaEntrega = DateTime.Now;                
                     iPedidoInsertar.fechaPedido = Convert.ToDateTime(txtPedidoFecha.Text);
                     iPedidoInsertar.PedidoVentaDetalle.AddRange(detallePedidoInsertar);
                     iPedidoInsertar.gastosEnvio = 0;
